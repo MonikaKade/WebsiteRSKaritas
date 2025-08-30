@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+    <!-- Section Navbar-->
+     <header class="navbar">
+        <div class="navbar-container">
+        <div class="navbar-left">
+            <img src="asset/logo.jpeg" alt="logo" class="logo">
+            <span class="site-name">Rumah Sakit Karitas Weetabula</span>
+        </div>
+        <nav class="nav-menu">
+            <a href="#">Home</a>
+            <a href="#">Tentang Kami</a>
+            <a href="#">Layanan</a>
+            <a href="#">Fasilitas</a>
+            <a href="#">kontak</a>
+        </nav>
+        <div class="navbar-search">
+          <input type="text" placeholder="Pencarian Cepat..." />
+          <button class="search-btn">Cari</button>
+        </div>
+      </div>
+     </header>
+
+    <!-- Section Hero -->
+     <section class="slider">
+        <div class="slides fade"> 
+            <img src="asset/bg.jpeg" alt="navigasi 1">
+        </div>
+        <div class="slides fade"> 
+            <img src="asset/nav2.jpeg" alt="navigasi 2">
+        </div>
+        <div class="slides fade"> 
+            <img src="asset/nav3.jpeg" alt="navigasi 3">
+        </div>
+    <!-- Tombol Navigasi -->
+        <a class="prev" onclick="plusSlides(-1)"></a>
+        <a class="next" onclick="plusSlides(1)"></a>
+
+    <!-- Titik Dot -->
+        <div class="dots">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+        </div>
+     </section>
+     <script src="js/script.js"></script>
+     
+</body>
+</html>

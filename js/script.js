@@ -132,7 +132,7 @@ function showContentLayanan(type, event) {
       <a href="dokter.html?poli=gigi" class="poli-card">Poli Gigi</a>
       <a href="dokter.html?poli=umum" class="poli-card">Poli Umum</a>
       <a href="dokter.html?poli=bedah" class="poli-card">Poli Bedah</a>
-      <a href="dokter.html?poli=penyakitdalam" class="poli-card">Poli Penyakit Dalam</a>
+      <a href="dokter.html?poli=penyakitdalam" class="poli-card">Penyakit Dalam</a>
       <a href="dokter.html?poli=obgyn" class="poli-card">Poli Obgyn</a>
       <a href="dokter.html?poli=mata" class="poli-card">Poli Mata</a>
       <a href="dokter.html?poli=saraf" class="poli-card">Poli Saraf</a>

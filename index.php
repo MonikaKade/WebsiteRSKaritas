@@ -1,3 +1,27 @@
+<?php
+session_start();
+include 'config.php';
+
+if (isset($_POST['login'])) {
+    $username = $_POST['username'];
+    $password = md5($_POST['password']); // enkripsi sederhana
+
+    $sql = "SELECT * FROM users WHERE username='$username' AND password='$password'";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        $_SESSION['admin'] = $username;
+        header("Location: dashboard.php");
+    } else { 
+        $error = "Username atau password salah!";
+    }
+}
+?>
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -86,12 +110,16 @@
         </ul>
       </div>
 
-
+    
 
       <!-- Konten dinamis -->
       <div class="content">
         <div id="submenu"></div>
-        <div id="dokterDetail"></div>
+        <div id="dokterDetail"> 
+          <h2>
+            KAMI SIAP MELAYANI ANDA DENGAN HATI DAN LAYANAN KAMI 
+          </h2>
+        </div>
       </div>
     </div>
   </section>

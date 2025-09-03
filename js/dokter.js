@@ -6,8 +6,8 @@ const dataDokter = {
       izin: "No. SIP: 12345", 
       foto: "asset/siti.jpeg", 
       jadwal: [
-        { hari: "Senin", jam: "08:00 - 12:00" },
-        { hari: "Rabu", jam: "10:00 - 14:00" }
+        { hari: "Senin:", jam: "08:00 - 12:00" },
+        { hari: "Rabu:", jam: "10:00 - 14:00" }
       ] 
     },
     {

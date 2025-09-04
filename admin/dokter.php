@@ -1,113 +1,129 @@
 <?php
-session_start();
 include("config.php");
 
-// Cek login
-if (!isset($_SESSION['admin'])) {
-    header("Location: login.php");
-    exit;
-}
+// Ambil semua poli
+$poli = mysqli_query($conn, "SELECT * FROM poli");
 
-// Tambah dokter baru
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['tambah'])) {
-    $nama = $_POST['nama'];
-    $izin = $_POST['izin'];
-    $spesialis = $_POST['spesialis'];
-
-    // upload foto
-    $foto = null;
-    if (!empty($_FILES['foto']['name'])) {
-        $targetDir = "uploads/dokter/";
-        if (!file_exists($targetDir)) {
-            mkdir($targetDir, 0777, true);
-        }
-        $foto = $targetDir . basename($_FILES['foto']['name']);
-        move_uploaded_file($_FILES['foto']['tmp_name'], $foto);
-    }
-
-    $stmt = $conn->prepare("INSERT INTO dokter (nama, izin, spesialis, foto) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $nama, $izin, $spesialis, $foto);
-    $stmt->execute();
-    $stmt->close();
-
-    header("Location: dokter.php");
-    exit;
-}
-
-// Hapus dokter
-if (isset($_GET['hapus'])) {
-    $id = $_GET['hapus'];
-    $stmt = $conn->prepare("DELETE FROM dokter WHERE id=?");
-    $stmt->bind_param("i", $id);
-    $stmt->execute();
-    $stmt->close();
-    header("Location: dokter.php");
-    exit;
-}
-
-// Ambil semua data dokter
-$result = $conn->query("SELECT * FROM dokter");
+// Ambil semua dokter
+$dokter = mysqli_query($conn, 
+    "SELECT d.*, p.nama_poli 
+     FROM dokter d 
+     JOIN poli p ON d.poli_id = p.id");
 ?>
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <title>Kelola Dokter</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        h1 { color: #2c3e50; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        table, th, td { border: 1px solid #ccc; }
-        th, td { padding: 10px; text-align: left; }
-        img { max-width: 80px; }
-        form { margin-top: 20px; }
-        input, select { padding: 8px; margin: 5px; width: 100%; }
-        button { padding: 8px 15px; background: #2c3e50; color: #fff; border: none; cursor: pointer; }
-        button:hover { background: #145A86; }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manajemen Dokter</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
-    <h1>Kelola Dokter</h1>
-    <p><a href="dashboard.php">⬅ Kembali ke Dashboard</a></p>
+<body class="bg-light">
 
-    <h2>Tambah Dokter Baru</h2>
-    <form method="POST" enctype="multipart/form-data">
-        <input type="text" name="nama" placeholder="Nama Dokter" required><br>
-        <input type="text" name="izin" placeholder="Nomor Izin" required><br>
-        <input type="text" name="spesialis" placeholder="Spesialis" required><br>
-        <input type="file" name="foto" accept="image/*"><br>
-        <button type="submit" name="tambah">Tambah</button>
-    </form>
+<div class="container py-5">
+  <h2 class="mb-4 text-center">🩺 Form Input Dokter</h2>
 
-    <h2>Daftar Dokter</h2>
-    <table>
-        <tr>
-            <th>ID</th>
+  <!-- Form Input -->
+  <div class="card shadow-sm mb-5">
+    <div class="card-body">
+      <form method="POST" action="simpan_dokter.php" enctype="multipart/form-data">
+        <div class="mb-3">
+          <label class="form-label">Nama Dokter</label>
+          <input type="text" name="nama" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Nomor SIP</label>
+          <input type="text" name="izin" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Spesialis</label>
+          <input type="text" name="spesialis" class="form-control" required>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Pilih Poli</label>
+          <select name="poli_id" class="form-select" required>
+            <option value="">-- Pilih Poli --</option>
+            <?php while($row = mysqli_fetch_assoc($poli)) { ?>
+              <option value="<?= $row['id'] ?>"><?= $row['nama_poli'] ?></option>
+            <?php } ?>
+          </select>
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Foto Dokter</label>
+          <input type="file" name="foto" class="form-control">
+        </div>
+        <hr>
+        <h5 class="mb-3">Jadwal Praktek</h5>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Hari</label>
+            <select name="hari" class="form-select">
+              <option value="">-- Pilih Hari --</option>
+              <option value="Senin">Senin</option>
+              <option value="Selasa">Selasa</option>
+              <option value="Rabu">Rabu</option>
+              <option value="Kamis">Kamis</option>
+              <option value="Jumat">Jumat</option>
+              <option value="Sabtu">Sabtu</option>
+              <option value="Minggu">Minggu</option>
+            </select>
+          </div>
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Jam Mulai</label>
+            <input type="time" name="jam_mulai" class="form-control">
+          </div>
+          <div class="col-md-4 mb-3">
+            <label class="form-label">Jam Selesai</label>
+            <input type="time" name="jam_selesai" class="form-control">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">💾 Simpan</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Daftar Dokter -->
+  <h2 class="mb-3 text-center">📋 Daftar Dokter</h2>
+  <div class="card shadow-sm">
+    <div class="card-body">
+      <table class="table table-bordered table-hover align-middle">
+        <thead class="table-dark">
+          <tr>
             <th>Nama</th>
-            <th>Izin</th>
+            <th>SIP</th>
             <th>Spesialis</th>
+            <th>Poli</th>
             <th>Foto</th>
-            <th>Aksi</th>
-        </tr>
-        <?php while($row = $result->fetch_assoc()): ?>
-        <tr>
-            <td><?= $row['id']; ?></td>
-            <td><?= htmlspecialchars($row['nama']); ?></td>
-            <td><?= htmlspecialchars($row['izin']); ?></td>
-            <td><?= htmlspecialchars($row['spesialis']); ?></td>
-            <td>
-                <?php if ($row['foto']): ?>
-                    <img src="<?= $row['foto']; ?>" alt="Foto Dokter">
-                <?php else: ?>
-                    -
-                <?php endif; ?>
-            </td>
-            <td>
-                <a href="dokter.php?hapus=<?= $row['id']; ?>" onclick="return confirm('Yakin hapus dokter ini?')">Hapus</a>
-            </td>
-        </tr>
-        <?php endwhile; ?>
-    </table>
+            <th width="100">Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php while($d = mysqli_fetch_assoc($dokter)) { ?>
+            <tr>
+              <td><?= $d['nama'] ?></td>
+              <td><?= $d['izin'] ?></td>
+              <td><?= $d['spesialis'] ?></td>
+              <td><?= $d['nama_poli'] ?></td>
+              <td>
+                <?php if($d['foto']) { ?>
+                  <img src="<?= $d['foto'] ?>" width="80" class="rounded">
+                <?php } else { ?>
+                  <span class="text-muted">Tidak ada</span>
+                <?php } ?>
+              </td>
+              <td>
+                <a href="hapus_dokter.php?id=<?= $d['id'] ?>" 
+                   class="btn btn-sm btn-danger"
+                   onclick="return confirm('Yakin mau hapus dokter ini?')">🗑 Hapus</a>
+              </td>
+            </tr>
+          <?php } ?>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

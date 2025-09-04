@@ -128,18 +128,18 @@ function showContentLayanan(type, event) {
     <h2>Rawat Inap</h2>
     <p>Pilih Poliklinik:</p>
     <div class="poli-grid">
-      <a href="dokter.html?poli=anak" class="poli-card">Poli Anak</a>
-      <a href="dokter.html?poli=gigi" class="poli-card">Poli Gigi</a>
-      <a href="dokter.html?poli=umum" class="poli-card">Poli Umum</a>
-      <a href="dokter.html?poli=bedah" class="poli-card">Poli Bedah</a>
-      <a href="dokter.html?poli=penyakitdalam" class="poli-card">Penyakit Dalam</a>
-      <a href="dokter.html?poli=obgyn" class="poli-card">Poli Obgyn</a>
-      <a href="dokter.html?poli=mata" class="poli-card">Poli Mata</a>
-      <a href="dokter.html?poli=saraf" class="poli-card">Poli Saraf</a>
-      <a href="dokter.html?poli=tb" class="poli-card">Poli TB</a>
-      <a href="dokter.html?poli=tht" class="poli-card">Poli THT</a>
-      <a href="dokter.html?poli=bkia" class="poli-card">Poli BKIA</a>
-      <a href="dokter.html?poli=vct" class="poli-card">Poli VCT</a>
+        <a href="pages/dokter.php?poli_id=1" class="poli-card">Poli Anak</a>
+        <a href="pages/dokter.php?poli_id=2" class="poli-card">Poli Gigi</a>
+        <a href="pages/dokter.php?poli_id=3" class="poli-card">Poli Umum</a>
+        <a href="pages/dokter.php?poli_id=4" class="poli-card">Poli Bedah</a>
+        <a href="pages/dokter.php?poli_id=5" class="poli-card">Penyakit Dalam</a>
+        <a href="pages/dokter.php?poli_id=6" class="poli-card">Poli Obgyn</a>
+        <a href="pages/dokter.php?poli_id=7" class="poli-card">Poli Mata</a>
+        <a href="pages/dokter.php?poli_id=8" class="poli-card">Poli Saraf</a>
+        <a href="pages/dokter.php?poli_id=9" class="poli-card">Poli TB</a>
+        <a href="pages/dokter.php?poli_id=10" class="poli-card">Poli THT</a>
+        <a href="pages/dokter.php?poli_id=11" class="poli-card">Poli BKIA</a>
+        <a href="pages/dokter.php?poli_id=12" class="poli-card">Poli VCT</a>
     </div>
   `;
 }

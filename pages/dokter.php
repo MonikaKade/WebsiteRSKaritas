@@ -9,7 +9,7 @@ $poli = mysqli_query($conn, "SELECT * FROM poli WHERE id=$poli_id");
 $poli_data = mysqli_fetch_assoc($poli);
 
 if (!$poli_data) {
-    die("Poli tidak ditemukan!");
+  die("Poli tidak ditemukan!");
 }
 
 // ambil data dokter berdasarkan poli
@@ -23,18 +23,20 @@ $dokter = mysqli_query($conn, $sql);
 ?>
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Daftar Dokter</title>
-  <link rel="stylesheet" href="../css/dokter.css"/>
+  <link rel="stylesheet" href="../css/dokter.css" />
 </head>
+
 <body>
   <!-- Navbar -->
   <header class="navbar">
     <div class="navbar-container">
       <div class="navbar-left">
-        <img src="../asset/logo.jpeg" alt="logo" class="logo"/>
+        <img src="../asset/logo.jpeg" alt="logo" class="logo" />
         <span class="site-name">Rumah Sakit Karitas Weetabula</span>
       </div>
       <nav class="nav-menu">
@@ -45,7 +47,7 @@ $dokter = mysqli_query($conn, $sql);
         <a href="#kontak">Kontak</a>
       </nav>
       <div class="navbar-search">
-        <input type="text" placeholder="Pencarian Cepat..."/>
+        <input type="text" placeholder="Pencarian Cepat..." />
         <button class="search-btn">Cari</button>
       </div>
     </div>
@@ -56,7 +58,7 @@ $dokter = mysqli_query($conn, $sql);
     <div class="hero-content">
       <h1>Periksakan Diri Anda<br>Dengan Dokter Terakreditasi</h1>
       <p>
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris 
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
         nisi ut aliquip ex ea commodo consequat.
       </p>
     </div>
@@ -69,27 +71,44 @@ $dokter = mysqli_query($conn, $sql);
 
   <!-- Container dokter -->
   <div id="dokter-container" style="max-width:900px; margin:auto;">
-    <?php while($d = mysqli_fetch_assoc($dokter)) { ?>
+    <?php while ($d = mysqli_fetch_assoc($dokter)) { ?>
       <div class="dokter-card">
-      <img src="uploads/dokter/<?= $d['foto'] ?>" 
-        alt="Foto Dokter" 
-        style="width:120px;height:120px;object-fit:cover;border-radius:10px;">
-      <strong><?= $d['nama'] ?></strong><br>
-      <?= $d['spesialis'] ?><br>
-      SIP: <?= $d['izin'] ?><br>
+  <img src="../admin/<?= $d['foto'] ?>" alt="Foto Dokter">
 
-        <h4>Jadwal:</h4>
-        <ul>
-          <?php
-          $jadwal = mysqli_query($conn, "SELECT * FROM jadwal_dokter WHERE dokter_id=".$d['id']);
-          while($j = mysqli_fetch_assoc($jadwal)) {
-            echo "<li>".$j['hari']." : ".substr($j['jam_mulai'],0,5)." - ".substr($j['jam_selesai'],0,5)."</li>";
-          }
-          ?>
-        </ul>
-      </div>
-      <hr>
+  <div class="dokter-info">
+    <h5><?= $d['nama'] ?></h5>
+    <p><?= $d['spesialis'] ?></p>
+    <p><small>SIP: <?= $d['izin'] ?></small></p>
+  </div>
+
+  <div class="dokter-jadwal">
+    <h6>Jadwal Praktek</h6>
+    <table>
+      <thead>
+        <tr>
+          <th>Hari</th>
+          <th>Jam Mulai</th>
+          <th>Jam Selesai</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+        $jadwal = mysqli_query($conn, "SELECT * FROM jadwal_dokter WHERE dokter_id=".$d['id']." ORDER BY 
+          FIELD(hari, 'Senin','Selasa','Rabu','Kamis','Jumat','Sabtu','Minggu')");
+        while($j = mysqli_fetch_assoc($jadwal)) {
+          echo "<tr>
+                  <td>".$j['hari']."</td>
+                  <td>".substr($j['jam_mulai'],0,5)."</td>
+                  <td>".substr($j['jam_selesai'],0,5)."</td>
+                </tr>";
+        }
+        ?>
+      </tbody>
+    </table>
+  </div>
+</div>
     <?php } ?>
   </div>
 </body>
+
 </html>

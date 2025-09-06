@@ -23,7 +23,7 @@ $dokter = mysqli_query($conn,
 <div class="container py-5">
   <h2 class="mb-4 text-center">🩺 Form Input Dokter</h2>
 
-  <!-- Form Input -->
+  <!-- Form Input Dokter -->
   <div class="card shadow-sm mb-5">
     <div class="card-body">
       <form method="POST" action="simpan_dokter.php" enctype="multipart/form-data">
@@ -52,31 +52,39 @@ $dokter = mysqli_query($conn,
           <label class="form-label">Foto Dokter</label>
           <input type="file" name="foto" class="form-control">
         </div>
+
         <hr>
         <h5 class="mb-3">Jadwal Praktek</h5>
-        <div class="row">
-          <div class="col-md-4 mb-3">
-            <label class="form-label">Hari</label>
-            <select name="hari" class="form-select">
-              <option value="">-- Pilih Hari --</option>
-              <option value="Senin">Senin</option>
-              <option value="Selasa">Selasa</option>
-              <option value="Rabu">Rabu</option>
-              <option value="Kamis">Kamis</option>
-              <option value="Jumat">Jumat</option>
-              <option value="Sabtu">Sabtu</option>
-              <option value="Minggu">Minggu</option>
-            </select>
-          </div>
-          <div class="col-md-4 mb-3">
-            <label class="form-label">Jam Mulai</label>
-            <input type="time" name="jam_mulai" class="form-control">
-          </div>
-          <div class="col-md-4 mb-3">
-            <label class="form-label">Jam Selesai</label>
-            <input type="time" name="jam_selesai" class="form-control">
+        <div id="jadwal-container">
+          <div class="row jadwal-row">
+            <div class="col-md-4 mb-3">
+              <label class="form-label">Hari</label>
+              <select name="hari[]" class="form-select">
+                <option value="">-- Pilih Hari --</option>
+                <option value="Senin">Senin</option>
+                <option value="Selasa">Selasa</option>
+                <option value="Rabu">Rabu</option>
+                <option value="Kamis">Kamis</option>
+                <option value="Jumat">Jumat</option>
+                <option value="Sabtu">Sabtu</option>
+                <option value="Minggu">Minggu</option>
+              </select>
+            </div>
+            <div class="col-md-3 mb-3">
+              <label class="form-label">Jam Mulai</label>
+              <input type="time" name="jam_mulai[]" class="form-control">
+            </div>
+            <div class="col-md-3 mb-3">
+              <label class="form-label">Jam Selesai</label>
+              <input type="time" name="jam_selesai[]" class="form-control">
+            </div>
+            <div class="col-md-2 mb-3 d-flex align-items-end">
+              <button type="button" class="btn btn-danger btn-remove">❌</button>
+            </div>
           </div>
         </div>
+        <button type="button" class="btn btn-success mb-3" id="add-jadwal">➕ Tambah Jadwal</button>
+
         <button type="submit" class="btn btn-primary">💾 Simpan</button>
       </form>
     </div>
@@ -94,7 +102,7 @@ $dokter = mysqli_query($conn,
             <th>Spesialis</th>
             <th>Poli</th>
             <th>Foto</th>
-            <th width="100">Aksi</th>
+            <th width="150">Aksi</th>
           </tr>
         </thead>
         <tbody>
@@ -112,6 +120,7 @@ $dokter = mysqli_query($conn,
                 <?php } ?>
               </td>
               <td>
+                <a href="edit_dokter.php?id=<?= $d['id'] ?>" class="btn btn-sm btn-warning">✏️ Edit</a>
                 <a href="hapus_dokter.php?id=<?= $d['id'] ?>" 
                    class="btn btn-sm btn-danger"
                    onclick="return confirm('Yakin mau hapus dokter ini?')">🗑 Hapus</a>
@@ -125,5 +134,29 @@ $dokter = mysqli_query($conn,
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// Tambah row jadwal baru
+document.getElementById('add-jadwal').addEventListener('click', function() {
+  let container = document.getElementById('jadwal-container');
+  let row = document.querySelector('.jadwal-row').cloneNode(true);
+
+  // kosongkan value input
+  row.querySelectorAll('input, select').forEach(el => el.value = "");
+
+  // tambahin event remove
+  row.querySelector('.btn-remove').addEventListener('click', function(){
+    row.remove();
+  });
+
+  container.appendChild(row);
+});
+
+// aktifkan tombol remove untuk row pertama
+document.querySelectorAll('.btn-remove').forEach(btn => {
+  btn.addEventListener('click', function(){
+    btn.closest('.jadwal-row').remove();
+  });
+});
+</script>
 </body>
 </html>

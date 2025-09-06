@@ -11,10 +11,21 @@
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: Arial, sans-serif, 'Poppins', 'Segoe UI';
   color: var(--text-color);
   background-color: var(--bg-light);
   padding-top: 60px;
+  line-height: 1.7;
+}
+h1, h2, h3, h4 {
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--primary-color);
+}
+
+p {
+  color: #444;
+  font-size: 16px;
 }
 /* Efek fade-in default */
 .fade-section {
@@ -40,11 +51,12 @@ html {
   top: 0;
   left: 0;
   width: 100%;
-  background-color: var(--primary-color);
+  background-color: rgba(27, 58, 75, 0.9);
   color: var(--text-light);
   z-index: 1000;
-  backdrop-filter: blur(8px);
-  transition: background-color 0.3s ease, padding 0.3s ease;
+  backdrop-filter: blur(6px);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-container {
@@ -87,11 +99,28 @@ html {
   text-decoration: none;
   padding: 5px 0;
   white-space: nowrap;
+  font-weight: 500;
+  font-size: 15px;
+  position: relative;
+  transition: 0.3s;
+}
+.navbar nav a::after {
+  content: "";
+  display: block;
+  width: 0;
+  height: 2px;
+  background: var(--accent-color);
+  transition: width 0.3s;
+  margin: auto;
 }
 
 .navbar nav a:hover {
   color: var(--accent-color);
 }
+.navbar nav a:hover::after {
+  width: 100%;
+}
+
 .navbar-search{
   display: flex;
   align-items: center;
@@ -160,14 +189,15 @@ html {
   background: linear-gradient(to right, var(--primary-color), var(--hover-color));
   color: var(--text-light);
   text-align: center;
-  padding: 60px 20px;
-  min-height: 60vh;
+  padding: 100px;
+  min-height: 100vh;
   position: relative;
   display: flex;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 5;
+  justify-content: space-between;
   border-radius: 10px;
 }
 
@@ -281,8 +311,8 @@ html {
 /*============= Tentang Kami =================*/
 
   .section{
-    padding: 60px 20px;
-    min-height: 60vh;
+    padding: 50px;
+    min-height: 90vh;
     align-items: center;
     justify-content: center;
     margin-bottom: 10px; /* kasih jarak antar section */
@@ -377,13 +407,15 @@ html {
 
 /*========== section Layanan ========*/
  .btn-layanan {
-    background: #1b3a4b;
-    color: white;
+  background: linear-gradient(to right, rgba(0, 70, 130, 0.65), rgba(0, 0, 0, 0.5)),
+              url("../asset/nav3.jpeg") center/cover no-repeat;    color: white;
     padding: 60px 20px;
     border-radius: 8px;
     cursor: pointer;
     transition: 0.3s;
+    
   }
+  
   .btn-layanan:hover {
     background: #145369;
   }
@@ -478,6 +510,91 @@ html {
 
 .poli-list a:hover {
   background: #0056b3;
+}
+
+/* ======= Section Layanan ======= */
+#layanan {
+  position: relative;
+  background: url("../asset/lay2.jpeg") center/cover no-repeat;
+  color: white;
+  padding: 60px 20px;
+}
+
+#layanan::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 40, 80, 0.7); /* overlay transparan */
+  z-index: 0;
+}
+
+#layanan .wrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  gap: 30px;
+}
+
+/* Sidebar */
+#layanan .sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+#layanan .sidebar li {
+  padding: 12px 18px;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#layanan .sidebar li:hover,
+#layanan .sidebar li.active {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Konten */
+#layanan .content {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 25px;
+  border-radius: 10px;
+  backdrop-filter: blur(6px);
+}
+
+/* Ilustrasi Gambar */
+.layanan-img {
+  width: 100%;
+  max-width: 100px;
+  border-radius: 10px;
+  margin: 15px 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  height: auto;
+}
+/* Gambar dalam konten layanan */
+#submenu img {
+  max-width: 100%;          /* biar responsif */
+  height: auto;
+  border-radius: 10px;      /* rounded biar modern */
+  margin-bottom: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3); /* kasih efek biar lebih pop-up */
+}
+
+/* Kontainer konten layanan */
+#submenu {
+  background: rgba(255, 255, 255, 0.1); /* transparan elegan */
+  padding: 20px;
+  border-radius: 15px;
+  backdrop-filter: blur(8px); /* efek glassmorphism */
+  color: #fff; /* biar font kontras */
+}
+
+/* Judul dalam konten */
+#submenu h2 {
+  color: #fff;
+  margin-bottom: 15px;
 }
 
 
@@ -662,10 +779,12 @@ html {
   padding-top: 15px;
   margin-top: 20px;
   font-size: 14px;
+  color: var(--text-light);
 }
 
 .footer-col p {
   margin: 5px 0;
+  color: var(--text-light);
 }
 
 .footer-col i {
@@ -681,7 +800,10 @@ html {
   .footer-social {
     margin-top: 10px;
   }
+
 }
+
+
 
 /* Efek hover & klik tombol */
 .btn-primary,

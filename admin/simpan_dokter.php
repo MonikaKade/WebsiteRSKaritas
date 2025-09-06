@@ -1,47 +1,60 @@
 <?php
 include("config.php");
 
+// Aktifkan error reporting biar kalau ada error tidak blank
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nama = $_POST['nama'];
     $izin = $_POST['izin'];
     $spesialis = $_POST['spesialis'];
     $poli_id = $_POST['poli_id'];
 
-   // Upload foto
-$foto = null;
-if (!empty($_FILES['foto']['name'])) {
-    $foto = "uploads/dokter/" . basename($_FILES['foto']['name']);
-    $targetFile = $targetDir . basename($_FILES['foto']['name']);
+    // Upload foto
+    $foto = null;
+    if (!empty($_FILES['foto']['name'])) {
+        $targetDir = "uploads/dokter/"; // definisikan folder
+        if (!is_dir($targetDir)) {
+            mkdir($targetDir, 0777, true); // bikin folder kalau belum ada
+        }
 
-    // pindahkan file ke folder uploads/dokter/
-    if (move_uploaded_file($_FILES['foto']['tmp_name'], $targetFile)) {
-        // simpan path sesuai lokasi sebenarnya
-        $foto = $targetFile; 
+        $fileName  = basename($_FILES['foto']['name']);
+        $targetFile = $targetDir . $fileName;
+
+        if (move_uploaded_file($_FILES['foto']['tmp_name'], $targetFile)) {
+            $foto = $targetFile;
+        }
     }
-}
-
 
     // Simpan dokter
     $sql = "INSERT INTO dokter (nama, izin, spesialis, foto, poli_id) 
             VALUES ('$nama','$izin','$spesialis','$foto','$poli_id')";
-    mysqli_query($conn, $sql);
+    if (!mysqli_query($conn, $sql)) {
+        die("Error insert dokter: " . mysqli_error($conn));
+    }
 
     // Ambil ID dokter terakhir
     $dokter_id = mysqli_insert_id($conn);
 
-    // Simpan jadwal (kalau diisi)
-    if (!empty($_POST['hari']) && !empty($_POST['jam_mulai']) && !empty($_POST['jam_selesai'])) {
-        $hari = $_POST['hari'];
-        $jam_mulai = $_POST['jam_mulai'];
-        $jam_selesai = $_POST['jam_selesai'];
+    // Simpan jadwal (kalau ada)
+    if (!empty($_POST['hari'])) {
+        foreach ($_POST['hari'] as $i => $hari) {
+            $jam_mulai   = $_POST['jam_mulai'][$i];
+            $jam_selesai = $_POST['jam_selesai'][$i];
 
-        $sql_jadwal = "INSERT INTO jadwal_dokter (dokter_id, hari, jam_mulai, jam_selesai)
-                       VALUES ('$dokter_id','$hari','$jam_mulai','$jam_selesai')";
-        mysqli_query($conn, $sql_jadwal);
+            if ($hari && $jam_mulai && $jam_selesai) {
+                $sqlJadwal = "INSERT INTO jadwal_dokter (dokter_id, hari, jam_mulai, jam_selesai) 
+                              VALUES ('$dokter_id', '$hari', '$jam_mulai', '$jam_selesai')";
+                if (!mysqli_query($conn, $sqlJadwal)) {
+                    die("Error insert jadwal: " . mysqli_error($conn));
+                }
+            }
+        }
     }
 
-    // Redirect balik ke form dokter
-    header("Location: dokter.php");
+    // Redirect biar tidak blank
+    header("Location: dokter.php?success=1");
     exit;
 }
 ?>

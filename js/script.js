@@ -116,11 +116,13 @@ function showContentLayanan(type, event) {
   if (type === "rawatjalan") {
     submenu.innerHTML = `
       <h2>Rawat Jalan</h2>
+      <img src="asset/lay1.jpeg" alt="rawat jalan" class="layanan-img">
       <p>Layanan rawat jalan tersedia untuk pasien umum maupun rujukan.</p>
     `;
   } else if (type === "igd") {
     submenu.innerHTML = `
       <h2>IGD 24 Jam</h2>
+      <img src="asset/lay2.jpeg" alt="IGD" class="layanan-img">
       <p>Layanan gawat darurat 24 jam dengan tenaga medis profesional.</p>
     `;
   } else if (type === "rawatinap") {

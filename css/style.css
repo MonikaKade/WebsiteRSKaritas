@@ -472,7 +472,7 @@ html {
 /*bagian poli*/
 .poli-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 20px;
   margin-top: 20px;
 }
@@ -488,7 +488,10 @@ html {
   cursor: pointer;
   transition: all 0.3s ease;
   text-decoration: none;
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80px;
 }
 
 .poli-card:hover {
@@ -558,17 +561,20 @@ html {
 /* Konten */
 #layanan .content {
   flex: 1;
-  background: rgba(255, 255, 255, 0.1);
   padding: 25px;
   border-radius: 10px;
   backdrop-filter: blur(6px);
+  display: block;
+  background: transparent;
+  color: white;
+
 }
 
 /* Ilustrasi Gambar */
 .layanan-img {
-  width: 100%;
+  width: 320px;
   max-width: 100px;
-  border-radius: 10px;
+  border-radius: 12px;
   margin: 15px 0;
   box-shadow: 0 4px 10px rgba(0,0,0,0.3);
   height: auto;
@@ -587,7 +593,7 @@ html {
   background: rgba(255, 255, 255, 0.1); /* transparan elegan */
   padding: 20px;
   border-radius: 15px;
-  backdrop-filter: blur(8px); /* efek glassmorphism */
+
   color: #fff; /* biar font kontras */
 }
 

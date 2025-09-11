@@ -40,7 +40,7 @@ $dokter = mysqli_query($conn, $sql);
         <span class="site-name">Rumah Sakit Karitas Weetabula</span>
       </div>
       <nav class="nav-menu">
-        <a href="#home">Home</a>
+        <a href="../index.php">Home</a>
         <a href="#tentangkami">Tentang Kami</a>
         <a href="#layanan">Layanan</a>
         <a href="#fasilitas">Fasilitas</a>
@@ -70,7 +70,7 @@ $dokter = mysqli_query($conn, $sql);
   </h2>
 
   <!-- Container dokter -->
-  <div id="dokter-container" style="max-width:900px; margin:auto;">
+  <div id="dokter-container">
     <?php while ($d = mysqli_fetch_assoc($dokter)) { ?>
       <div class="dokter-card">
   <img src="../admin/<?= $d['foto'] ?>" alt="Foto Dokter">

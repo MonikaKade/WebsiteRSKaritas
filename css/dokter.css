@@ -1,126 +1,47 @@
+/* ================== Variables =================== */
 :root {
-  --primary-color: #1b3a4b;
-  --secondary-color: #78f0aa9a;
-  --text-color: #2C3E50;
-  --text-light: #ffffff;
-  --bg-light: #F8F9FA;
-  --bg-dark: #1B2631;
-  --accent-color: #f1c40f;
-  --hover-color: #145A86;
+  --primary-color: #2563EB;   /* biru utama */
+  --secondary-color: #3B82F6; /* biru muda */
+  --text-color: #1E293B;      /* abu gelap */
+  --text-light: #ffffff;      /* putih */
+  --bg-light: #ffffff;        /* putih */
+  --bg-soft: #F9FAFB;         /* abu muda */
+  --bg-accent: #EFF6FF;       /* biru sangat lembut */
+  --hover-color: #1E40AF;     /* biru lebih gelap */
+  --accent-color: #60A5FA;    /* biru aksen */
+}
+
+/* ================== Global =================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: "Poppins", "Segoe UI", Arial, sans-serif;
   color: var(--text-color);
-  background-color: var(--bg-light);
-  padding-top: 60px;
-} 
- 
- 
- .hero {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column; /* biar konten hero ke tengah */
-  padding: 60px 10% 80px; 
-  text-align: center;
-  background: linear-gradient(to right, rgba(0, 70, 130, 0.65), rgba(0, 0, 0, 0.5)),
-              url("../asset/dok.jpeg") center/cover no-repeat;
-  position: relative;
-  color: var(--text-light);
+  background: var(--bg-light);
+  line-height: 1.7;
+  scroll-behavior: smooth;
 }
 
-.hero-content {
-  max-width: 700px;
-  z-index: 2;
-}
-
-.hero-content h1 {
-  font-size: 3rem;
-  font-weight: 700;
-  margin-bottom: 20px;
-  color: var(--text-light);  /* biar kontras */
-}
-
-.hero-content p {
-  font-size: 1.1rem;
-  line-height: 1.8;
-  margin-bottom: 30px;
-  color: #e6e6e6; /* abu-abu terang biar gampang dibaca */
-}
-
-.btn {
-  display: inline-block;
-  background: var(--accent-color);
-  color: var(--text-dark);
-  padding: 14px 32px;
+a {
   text-decoration: none;
-  border-radius: 8px;
-  font-weight: 600;
-  transition: all 0.3s ease;
+  color: inherit;
 }
-
-.btn:hover {
-  background: var(--hover-color);
-  color: var(--text-light);
-  transform: translateY(-3px);
-}
-
-.doctors-section {
-  padding: 60px 20px;
-  background: #f9f9f9;
-  text-align: center;
-}
-
-.section-title {
-  font-size: 2rem;
-  margin-bottom: 30px;
-  color: #145a86;
-}
-
-.search-bar {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-bottom: 40px;
-}
-
-.search-bar input, .search-bar select {
-  padding: 10px;
-  border-radius: 6px;
-  border: 1px solid #ddd;
-  min-width: 200px;
-}
-
-.btn-search {
-  background: #27ae60;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
-  cursor: pointer;
-} 
-
-/* ================== Navbar ======================== */
-/* ================== Navbar ======================== */
+/* ===== Navbar ===== */
 .navbar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: rgba(27, 58, 75, 0.9);
+  background: var(--primary-color);
   color: var(--text-light);
-  z-index: 1000;
-  backdrop-filter: blur(6px);
-  transition: background 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+  padding: 12px 30px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 100;
 }
 
 .navbar-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 10px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -129,193 +50,265 @@ body {
 .navbar-left {
   display: flex;
   align-items: center;
-  gap: 10px;
-  flex: 1;
 }
 
 .logo {
-  width: 40px;
-  height: 40px;
+  height: 45px;
+  margin-right: 10px;
   border-radius: 50%;
-  object-fit: cover;
 }
 
 .site-name {
-  font-weight: 700;
-  font-size: 1.1rem;
-  color: var(--text-light);
+  font-weight: 600;
+  font-size: 18px;
 }
 
-.navbar nav {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 15px;
-}
-
-.navbar nav a {
+.nav-menu a {
   color: var(--text-light);
+  margin: 0 12px;
   text-decoration: none;
-  padding: 5px 0;
-  white-space: nowrap;
   font-weight: 500;
-  font-size: 15px;
-  position: relative;
-  transition: 0.3s;
-}
-.navbar nav a::after {
-  content: "";
-  display: block;
-  width: 0;
-  height: 2px;
-  background: var(--accent-color);
-  transition: width 0.3s;
-  margin: auto;
+  transition: color 0.3s;
 }
 
-.navbar nav a:hover {
-  color: var(--accent-color);
-}
-.navbar nav a:hover::after {
-  width: 100%;
+.nav-menu a:hover {
+  color: var(--secondary-color);
 }
 
-.navbar-search{
+.navbar-search {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin-left: 30px;
-}
-.navbar-center{
-  flex: 2;
-  display: flex;
-  justify-content: center;
 }
 
-.navbar-right{
-  flex: 1;
-  display: flex;
-  justify-content: flex-end;
-}
 .navbar-search input {
-  padding: 5px 10px;
+padding: 5px 10px;
   font-size: 14px;
   border: none;
-  border-bottom: 1px solid #fff;
+  border-bottom: 1px solid var(--text-light); /* Garis bawah putih */
   background: transparent;
-  color: var(--text-light);
+  color:var(--text-color);
   outline: none;
 }
 
 .search-btn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
+  background: var(--secondary-color);
   color: var(--text-light);
-  border-bottom: 1px solid #fff;
-  padding:4px 6px;
-  transition: color 0.3s, border-color 0.3s;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 0 4px 4px 0;
+  cursor: pointer;
+  transition: background 0.3s;
 }
-.search-btn:hover{
-  color: var(--accent-color);
-  border-color: var(--accent-color);
-}
-/* Responsive Navbar */
-@media (max-width: 992px) {
-  .navbar-container {
-    flex-direction: column;
-    align-items: flex-start;
-  }
 
-  .navbar nav {
-    flex-direction: column;
-    width: 100%;
-    gap: 8px;
-  }
-
-  .navbar nav a {
-    display: block;
-    padding: 8px 0;
-  }  
+.search-btn:hover {
+  background: var(--hover-color);
 }
-.nav-menu a.active {
-    color: var(--accent-color);
-    font-weight: bold;
-  }
+
+/* ===== Slider ===== */
+.slider {
+  margin-top: 70px;
+  position: relative;
+}
+
+.slides img {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  padding: 10px;
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--text-light);
+  background: rgba(0,0,0,0.4);
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+.prev { left: 20px; }
+.next { right: 20px; }
+
+.dots {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.dot {
+  cursor: pointer;
+  height: 12px;
+  width: 12px;
+  margin: 0 3px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: 0.3s;
+}
+
+.dot.active, .dot:hover {
+  background-color: var(--primary-color);
+}
+
+/* ================== Hero Section =================== */
+.hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 90px 10% 100px;
+  text-align: center;
+  margin-top: 0;
+  padding-top: 120px;
+  /* Gradient + Gambar */
+  background: 
+    linear-gradient(to right, rgba(37, 99, 235, 0.7), rgba(59, 130, 246, 0.7)),
+    url("../asset/dok.jpeg") center/cover no-repeat;
+
+  color: var(--text-light);
+  position: relative;
+}
+
+.hero-content {
+  max-width: 700px;
+}
+.hero-content h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+.hero-content p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  margin-bottom: 30px;
+  color: #f0f4ff;
+}
+.btn {
+  display: inline-block;
+  background: var(--secondary-color);
+  color: var(--text-light);
+  padding: 12px 28px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.btn:hover {
+  background: var(--hover-color);
+  transform: translateY(-3px);
+}
+
+/* ================== Doctors Section =================== */
+.doctors-section {
+  padding: 60px 20px;
+  background: var(--bg-soft);
+  text-align: center;
+}
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: var(--primary-color);
+  font-weight: 700;
+}
+.search-bar {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+.search-bar input,
+.search-bar select {
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  min-width: 220px;
+  font-size: 14px;
+}
+.btn-search {
+  background: var(--primary-color);
+  color: var(--text-light);
+  border: none;
+  padding: 10px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+.btn-search:hover {
+  background: var(--hover-color);
+}
+
 /* ================== Card Dokter =================== */
 #dokter-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 25px;
   padding: 20px;
 }
-
 .dokter-card {
   background: #fff;
-  padding: 20px;
-  border-radius: 16px;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.1);
+  padding: 25px 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.06);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
 .dokter-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 22px rgba(0,0,0,0.15);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.12);
 }
-
 .dokter-card img {
-  width: 120px;
-  height: 120px;
+  width: 110px;
+  height: 110px;
   border-radius: 50%;
   object-fit: cover;
-  border: 4px solid var(--accent-color);
+  border: 3px solid var(--secondary-color);
   display: block;
   margin: 0 auto 15px;
 }
-
 .dokter-info {
   text-align: center;
 }
-
 .dokter-info h5 {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: var(--primary-color);
   margin-bottom: 5px;
+  font-weight: 600;
 }
-
 .dokter-info p {
-  margin: 2px 0;
+  margin: 3px 0;
   font-size: 0.95rem;
   color: #555;
 }
 
 /* ================== Jadwal Dokter =================== */
 .dokter-jadwal {
-  margin-top: 15px;
+  margin-top: 18px;
 }
-
 .dokter-jadwal h6 {
   font-weight: 600;
-  margin-bottom: 8px;
-  color: var(--primary-color);
+  margin-bottom: 10px;
+  color: var(--secondary-color);
   text-align: center;
 }
-
 .dokter-jadwal table {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.9rem;
+  border-radius: 6px;
+  overflow: hidden;
 }
-
 .dokter-jadwal th,
 .dokter-jadwal td {
-  border: 1px solid #ddd;
-  padding: 6px 10px;
+  border: 1px solid #e6e6e6;
+  padding: 8px 10px;
   text-align: center;
 }
-
 .dokter-jadwal th {
-  background-color: var(--secondary-color);
-  color: #003366;
+  background-color: var(--bg-accent);
+  color: var(--primary-color);
   font-weight: 600;
 }

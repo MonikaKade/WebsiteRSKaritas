@@ -1,3 +1,18 @@
+<?php
+session_start();
+include "admin/config.php"; // koneksi DB
+
+// Ambil data dari tabel hero
+$heroData = [];
+$sqlHero = "SELECT * FROM hero";
+$resultHero = $conn->query($sqlHero);
+
+if ($resultHero && $resultHero->num_rows > 0) {
+    while ($row = $resultHero->fetch_assoc()) {
+        $heroData[] = $row;
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -10,6 +25,7 @@
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
+  <!-- NAVBAR -->
   <header class="navbar">
     <div class="navbar-container">
       <div class="navbar-left">
@@ -30,19 +46,32 @@
     </div>
   </header>
 
+  <!-- HERO / SLIDER -->
   <section id="home" class="slider">
-    <div class="slides fade"><img src="asset/bg.jpeg" alt="slide1"></div>
-    <div class="slides fade"><img src="asset/nav2.jpeg" alt="slide2"></div>
-    <div class="slides fade"><img src="asset/nav3.jpeg" alt="slide3"></div>
+    <?php foreach($heroData as $row): ?>
+      <?php
+        // pastikan path gambar benar
+        $fotoPath = "admin/" . $row['foto'];
+        if (!file_exists($fotoPath)) {
+            $fotoPath = "asset/default.jpg"; // fallback kalau file tidak ada
+        }
+      ?>
+      <div class="slides fade">
+        <img src="<?= $fotoPath ?>" alt="Hero Image">
+      </div>
+    <?php endforeach; ?>
+
     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
     <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
     <div class="dots">
-      <span class="dot" onclick="currentSlide(1)"></span>
-      <span class="dot" onclick="currentSlide(2)"></span>
-      <span class="dot" onclick="currentSlide(3)"></span>
+      <?php for($i=1; $i <= count($heroData); $i++): ?>
+        <span class='dot' onclick='currentSlide(<?= $i ?>)'></span>
+      <?php endfor; ?>
     </div>
   </section>
 
+  <!-- TENTANG KAMI -->
   <section id="tentangkami" class="section section-tentang-kami fade-section">
     <div class="wrapper">
       <div class="sidebar">
@@ -54,11 +83,11 @@
           <li data-content="penghargaan">Penghargaan & Akreditasi</li>
         </ul>
       </div>
-      <div class="content" id="contentTentangKami">
-        </div>
+      <div class="content" id="contentTentangKami"></div>
     </div>
   </section>
 
+  <!-- LAYANAN -->
   <section id="layanan" class="section section-layanan">
     <div class="wrapper">
       <div class="sidebar">
@@ -68,11 +97,11 @@
           <li data-content="rawatinap">Rawat Inap</li>
         </ul>
       </div>
-      <div class="content" id="contentLayanan">
-        </div>
+      <div class="content" id="contentLayanan"></div>
     </div>
   </section>
 
+  <!-- FASILITAS -->
   <section id="fasilitas" class="section section-fasilitas fade-section">
     <div class="wrapper">
       <div class="sidebar">
@@ -83,11 +112,11 @@
           <li data-content="apotik">Apotik</li>
         </ul>
       </div>
-      <div class="content" id="contentFasilitas">
-        </div>
+      <div class="content" id="contentFasilitas"></div>
     </div>
   </section>
 
+  <!-- KONTAK -->
   <section id="kontak" class="section section-kontak fade-section">
     <div class="wrapper">
       <div class="contact-info" style="flex: 1;">
@@ -127,6 +156,7 @@
     </div>
   </section>
 
+  <!-- FOOTER -->
   <footer class="footer">
     <div class="footer-container">
       <div class="footer-col">
@@ -173,6 +203,7 @@
     </div>
   </footer>
 
+  <!-- JS -->
   <script src="js/script.js"></script>
   <script>
     AOS.init();

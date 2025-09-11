@@ -65,7 +65,6 @@ if (!isset($_SESSION['admin'])) {
         <ul>
             <li><a href="dokter.php">👨‍⚕️ Kelola Dokter</a></li>
             <li><a href="hero.php">🖼️ Kelola Hero Section</a></li>
-            <li><a href="ruangan.php">🏥 Kelola Ruangan</a></li>
             <li><a href="logout.php" class="logout">🚪 Logout</a></li>
         </ul>
     </main>

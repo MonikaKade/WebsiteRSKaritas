@@ -20,9 +20,10 @@ $dokter = mysqli_query($conn,
 </head>
 <body class="bg-light">
 
+
 <div class="container py-5">
   <h2 class="mb-4 text-center">🩺 Form Input Dokter</h2>
-
+<a href="dashboard.php" class="btn btn-secondary">⬅ Kembali ke Dashboard</a>
   <!-- Form Input Dokter -->
   <div class="card shadow-sm mb-5">
     <div class="card-body">

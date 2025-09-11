@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST["username"]);
     $password = trim($_POST["password"]);
 
-    $query = $conn->prepare("SELECT * FROM admin WHERE username=?");
+    $query = $conn->prepare("SELECT * FROM admin WHERE username=? LIMIT 1");
     $query->bind_param("s", $username);
     $query->execute();
     $result = $query->get_result();
@@ -20,8 +20,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if ($result->num_rows > 0) {
         $admin = $result->fetch_assoc();
 
-        // sementara pakai plain text (nanti bisa di-hash)
-        if ($password === $admin['password']) {
+        // cek password pakai password_verify
+        if (password_verify($password, $admin['password'])) {
             $_SESSION['admin'] = $admin['username'];
             header("Location: dashboard.php");
             exit;
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <title>Login Admin</title>

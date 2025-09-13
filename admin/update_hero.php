@@ -1,44 +1,42 @@
 <?php
+session_start();
 include "config.php";
 
-if (isset($_POST['id']) && !empty($_FILES['foto']['name'])) {
-    $id = intval($_POST['id']);
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id"])) {
+    $id = $_POST["id"];
 
-    // Ambil data lama
-    $sql = "SELECT foto FROM hero WHERE id = $id";
-    $result = $conn->query($sql);
-    $oldFoto = "";
-    if ($result && $result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $oldFoto = $row['foto'];
-    }
+    // Update foto jika ada
+    if(isset($_FILES['foto']) && $_FILES['foto']['name'] != ""){
+        $fileName = time() . "_" . basename($_FILES["foto"]["name"]);
+        $targetFile = "uploads/" . $fileName;
 
-    $allowed = ['jpg','jpeg','png','gif'];
-    $uploadDir = "uploads/hero/";
-
-    $name = $_FILES['foto']['name'];
-    $tmp  = $_FILES['foto']['tmp_name'];
-    $ext  = strtolower(pathinfo($name, PATHINFO_EXTENSION));
-
-    if (in_array($ext, $allowed)) {
-        $newName = time() . "_" . uniqid() . "." . $ext;
-        $dest = $uploadDir . $newName;
-
-        if (move_uploaded_file($tmp, $dest)) {
-            // Update database
-            $stmt = $conn->prepare("UPDATE hero SET foto=? WHERE id=?");
-            $stmt->bind_param("si", $dest, $id);
-            $stmt->execute();
-            $stmt->close();
-
-            // Hapus file lama
-            if (!empty($oldFoto) && file_exists($oldFoto)) {
-                unlink($oldFoto);
+        if(move_uploaded_file($_FILES["foto"]["tmp_name"], $targetFile)){
+            // Hapus foto lama
+            $old = $conn->query("SELECT foto FROM hero WHERE id=$id")->fetch_assoc();
+            if($old && file_exists($old['foto'])){
+                unlink($old['foto']);
             }
+            $conn->query("UPDATE hero SET foto='$targetFile' WHERE id=$id");
         }
     }
-}
 
-// 🔥 Redirect langsung ke dashboard
-header("Location: dashboard.php?status=success");
-exit;
+    // Update video jika ada
+    if(isset($_FILES['video']) && $_FILES['video']['name'] != ""){
+        $fileName = time() . "_" . basename($_FILES["video"]["name"]);
+        $targetFile = "uploads/" . $fileName;
+
+        if(move_uploaded_file($_FILES["video"]["tmp_name"], $targetFile)){
+            // Hapus video lama
+            $old = $conn->query("SELECT video FROM hero WHERE id=$id")->fetch_assoc();
+            if($old && file_exists($old['video'])){
+                unlink($old['video']);
+            }
+            $conn->query("UPDATE hero SET video='$targetFile' WHERE id=$id");
+        }
+    }
+
+    $_SESSION['statusMessage'] = "✅ Hero berhasil diperbarui!";
+    header("Location: hero.php");
+    exit;
+}
+?>

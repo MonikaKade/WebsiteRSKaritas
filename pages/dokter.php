@@ -47,9 +47,37 @@ $dokter = mysqli_query($conn, $sql);
         <a href="#kontak">Kontak</a>
       </nav>
       <div class="navbar-search">
-        <input type="text" placeholder="Pencarian Cepat..." />
-        <button class="search-btn">Cari</button>
-      </div>
+  <input type="text" id="searchDokter" placeholder="Cari Dokter / Spesialis..." />
+  <button type="button" class="search-btn" onclick="filterDokter()">Cari</button>
+</div>
+
+<script>
+function filterDokter() {
+  let keyword = document.getElementById("searchDokter").value.toLowerCase();
+  let cards = document.querySelectorAll(".dokter-card");
+
+  let firstMatch = null; // untuk simpan hasil pertama
+
+  cards.forEach(card => {
+    let text = card.innerText.toLowerCase();
+    if (text.includes(keyword)) {
+      card.style.display = "block";
+      if (!firstMatch) firstMatch = card; // simpan yg pertama ketemu
+    } else {
+      card.style.display = "none";
+    }
+  });
+
+  if (firstMatch) {
+    firstMatch.scrollIntoView({ behavior: "smooth", block: "center" });
+    firstMatch.style.backgroundColor = "rgba(255,255,0,0.2)"; // highlight
+    setTimeout(() => firstMatch.style.backgroundColor = "", 2000); // hilangkan highlight setelah 2 detik
+  } else {
+    alert("Dokter tidak ditemukan!");
+  }
+}
+</script>
+
     </div>
   </header>
 

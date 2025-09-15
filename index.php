@@ -78,13 +78,13 @@ if ($resultHero && $resultHero->num_rows > 0) {
 
   <section id="home" class="slider">
     <?php foreach ($heroData as $row): ?>
-        <div class="slides fade">
+        <div class="slides">
             <?php if (!empty($row['video'])): ?>
                 <video autoplay muted loop class="hero-video">
-                    <source src="<?= $row['video'] ?>" type="video/mp4">
+                    <source src="admin/<?= $row['video'] ?>" type="video/mp4">
                 </video>
             <?php elseif (!empty($row['foto'])): ?>
-                <img src="<?= $row['foto'] ?>" alt="Hero Image">
+                <img src="admin/<?= $row['foto'] ?>" alt="Hero Image">
             <?php else: ?>
                 <img src="asset/default.jpg" alt="Default">
             <?php endif; ?>
@@ -101,13 +101,7 @@ if ($resultHero && $resultHero->num_rows > 0) {
     </div>
 </section>
 
-<style>
-.hero-video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-</style>
+
 
 
     <!-- TENTANG KAMI -->

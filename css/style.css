@@ -116,28 +116,17 @@ padding: 5px 10px;
   position: absolute;
   width: 100%;
   height: 100%;
+  animation: none !important;
 }
 
-.slides img {
+.slides img,
+.slides video {
   width: 100%;
-  height: 500px;
+  height: 450px;
   object-fit: cover;
   border-radius: 0;
 }
 
-.fade {
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-
-@keyframes fade {
-  from {
-    opacity: 0.4;
-  }
-  to {
-    opacity: 1;
-  }
-}
 
 .prev,
 .next {
@@ -187,7 +176,7 @@ padding: 5px 10px;
 }
 /* ===== Section General ===== */
 .section {
-  padding: 60px 20px;
+  padding: 70px 20px;
   background: var(--bg-soft);
 }
 

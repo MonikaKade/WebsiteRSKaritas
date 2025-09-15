@@ -8,7 +8,7 @@ $videoPath = "";
 // Simpan Foto
 if (($type === "foto1" || $type === "foto2") && !empty($_FILES['foto']['name'])) {
     $fotoName = time() . "_" . $_FILES['foto']['name'];
-    $targetFoto = "uploads/" . $fotoName;
+    $targetFoto = "../uploads/" . $fotoName;
     if (move_uploaded_file($_FILES['foto']['tmp_name'], $targetFoto)) {
         $fotoPath = $targetFoto;
     }
@@ -17,7 +17,7 @@ if (($type === "foto1" || $type === "foto2") && !empty($_FILES['foto']['name']))
 // Simpan Video
 if ($type === "video" && !empty($_FILES['video']['name'])) {
     $videoName = time() . "_" . $_FILES['video']['name'];
-    $targetVideo = "uploads/" . $videoName;
+    $targetVideo = "../uploads/" . $videoName;
     if (move_uploaded_file($_FILES['video']['tmp_name'], $targetVideo)) {
         $videoPath = $targetVideo;
     }

@@ -20,7 +20,7 @@ function showSlides() {
   slides[slideIndex - 1].style.display = "block";
   dots[slideIndex - 1].classList.add("active");
 
-  setTimeout(showSlides, 4000);
+  setTimeout(showSlides, 10000);
 }
 
 function plusSlides(n) {
@@ -88,21 +88,7 @@ const contentDataTentangKami = {
   profil: `
     <h2>Profil</h2>
     <p>
-    Sejarah rumah sakit berawal dari institusi pengobatan kuno di Mesir dan Yunani, kemudian berkembang melalui Islam dengan pembangunan rumah sakit pertama di Damaskus pada abad ke-8 Masehi. Peran rumah sakit beralih dari rumah amal atau penginapan pada Abad Pertengahan menjadi institusi medis di era modern, dengan perkembangan signifikan di Eropa, dan kemudian menyebar ke koloni-koloninya di seluruh dunia, termasuk di Indonesia yang awalnya didirikan oleh VOC untuk militer pada abad ke-17. Perkembangan Awal dan Konsep Kuno
-    Institusi Kuno:
-    Kepercayaan dan pengobatan erat kaitannya di masa kuno, contohnya kuil-kuil di Mesir dan Kuil Æsculapius di Yunani yang menyediakan pengobatan. 
-    Konsep Rumah Amal:
-    Selama Abad Pertengahan, rumah sakit lebih berfungsi sebagai rumah amal, tempat penampungan peziarah, atau hostel, daripada institusi medis seperti sekarang. 
-    Perkembangan dalam Sejarah Islam
-    Rumah Sakit Pertama:
-    Rumah sakit pertama dalam sejarah Islam didirikan oleh Khalifah Al-Walid I dari dinasti Umayyah pada tahun 705-715 Masehi di Damaskus, Suriah. 
-    Institusi Kompleks:
-    Rumah sakit-rumah sakit ini mempekerjakan banyak staf medis, membedakan penanganan untuk berbagai penyakit, dan didanai pemerintah. 
-    Perkembangan di Indonesia
-    Masa Kolonial:
-    Sejarah rumah sakit di Indonesia dimulai dengan pendirian rumah sakit oleh VOC pada tahun 1626 dan kemudian oleh tentara Inggris untuk melayani anggota militer dan keluarga mereka. 
-    Perkembangan Berkelanjutan:
-    Setelah kemerdekaan, pemerintah Indonesia terus meningkatkan kualitas dan cakupan pelayanan kesehatan, serta mendorong pengembangan tenaga kesehatan dan pembangunan rumah sakit baik di perkotaan maupun pedesaan. 
+     Setelah kemerdekaan, pemerintah Indonesia terus meningkatkan kualitas dan cakupan pelayanan kesehatan, serta mendorong pengembangan tenaga kesehatan dan pembangunan rumah sakit baik di perkotaan maupun pedesaan. 
     Perkembangan Modern dan Etimologi
     Dari Latin:
     Kata "rumah sakit" (hospital) berasal dari bahasa Latin hospes, yang berarti tamu atau orang asing, dan hospitium yang berarti keramahtamahan. 

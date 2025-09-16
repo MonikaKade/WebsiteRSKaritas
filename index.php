@@ -45,7 +45,6 @@ if ($resultHero && $resultHero->num_rows > 0) {
                 <a href="#home">Home</a>
                 <a href="#tentangkami">Tentang Kami</a>
                 <a href="#layanan">Layanan</a>
-                <a href="#fasilitas">Fasilitas</a>
                 <a href="#kontak">Kontak</a>
             </nav>
 
@@ -102,8 +101,6 @@ if ($resultHero && $resultHero->num_rows > 0) {
 </section>
 
 
-
-
     <!-- TENTANG KAMI -->
     <section id="tentangkami" class="section section-tentang-kami fade-section">
         <div class="wrapper">
@@ -135,20 +132,7 @@ if ($resultHero && $resultHero->num_rows > 0) {
         </div>
     </section>
 
-    <!-- FASILITAS -->
-    <section id="fasilitas" class="section section-fasilitas fade-section">
-        <div class="wrapper">
-            <div class="sidebar">
-                <ul>
-                    <li class="active" data-content="lab">Laboratorium</li>
-                    <li data-content="radiologi">Radiologi</li>
-                    <li data-content="fisioterapi">Fisioterapi</li>
-                    <li data-content="apotik">Apotik</li>
-                </ul>
-            </div>
-            <div class="content" id="contentFasilitas"></div>
-        </div>
-    </section>
+
 
     <!-- KONTAK -->
     <section id="kontak" class="section section-kontak fade-section">

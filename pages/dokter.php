@@ -41,10 +41,10 @@ $dokter = mysqli_query($conn, $sql);
       </div>
       <nav class="nav-menu">
         <a href="../index.php">Home</a>
-        <a href="#tentangkami">Tentang Kami</a>
-        <a href="#layanan">Layanan</a>
-        <a href="#fasilitas">Fasilitas</a>
-        <a href="#kontak">Kontak</a>
+        <a href="../index.php">Tentang Kami</a>
+        <a href="../index.php">Layanan</a>
+        <a href="../index.php">Fasilitas</a>
+        <a href="../index.php">Kontak</a>
       </nav>
       <div class="navbar-search">
   <input type="text" id="searchDokter" placeholder="Cari Dokter / Spesialis..." />

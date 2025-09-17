@@ -83,10 +83,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* ================= Dynamic Content ================= */
 
-// Tentang Kami
+// Tentang Kami: SESUAIKAN/UBAH ISINYA YG DI DALAM TAG <P></P>
 const contentDataTentangKami = {
   profil: `
-    <h2>Profil</h2>
+    <h2>Profil</h2> 
     <p>
      Setelah kemerdekaan, pemerintah Indonesia terus meningkatkan kualitas dan cakupan pelayanan kesehatan, serta mendorong pengembangan tenaga kesehatan dan pembangunan rumah sakit baik di perkotaan maupun pedesaan. 
     Perkembangan Modern dan Etimologi

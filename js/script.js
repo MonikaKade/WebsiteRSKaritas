@@ -200,18 +200,38 @@ const contentDataFasilitas = {
   radiologi: `
     <h2>Radiologi</h2>
     <p>Layanan radiologi untuk kebutuhan X-Ray, USG, dan CT-Scan.</p>
+        <div class="layanan-grid">
+      <img src="asset/lay1.jpeg" class="img-square">
+      <img src="asset/rj1.jpeg" class="img-square">
+      <img src="asset/rj1.jpeg" class="img-square">
+    </div>
   `,
   fisioterapi: `
     <h2>Fisioterapi</h2>
     <p>Layanan fisioterapi untuk pemulihan cedera dan rehabilitasi pasien.</p>
+        <div class="layanan-grid">
+      <img src="asset/lay1.jpeg" class="img-square">
+      <img src="asset/rj1.jpeg" class="img-square">
+      <img src="asset/rj1.jpeg" class="img-square">
+    </div>
   `,
   apotik: `
     <h2>Apotik</h2>
     <p>Apotik dengan obat-obatan lengkap sesuai resep dokter.</p>
+        <div class="layanan-grid">
+      <img src="asset/lay1.jpeg" class="img-square">
+      <img src="asset/rj1.jpeg" class="img-square">
+      <img src="asset/rj1.jpeg" class="img-square">
+    </div>
   `,
   rekammedik: `
     <h2>Rekam Medik</h2>
     <p>Sistem rekam medis digital untuk pengelolaan data pasien.</p>
+        <div class="layanan-grid">
+      <img src="asset/lay1.jpeg" class="img-square">
+      <img src="asset/rj1.jpeg" class="img-square">
+      <img src="asset/rj1.jpeg" class="img-square">
+    </div>
   `,
 };
 

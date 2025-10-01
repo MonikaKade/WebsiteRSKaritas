@@ -128,8 +128,9 @@ const contentDataTentangKami = {
       Rumah Sakit Karitas Weetabula telah menerima berbagai penghargaan
       nasional maupun internasional serta terakreditasi paripurna KARS.
     </p>
-    <img src="asset/download.jpeg" alt="IGD">
-
+    <div style="text-align: center;">
+     <img src="asset/download.jpeg" alt="IGD">
+    </div>
   `,
 };
 

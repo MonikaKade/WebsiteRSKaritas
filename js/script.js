@@ -372,3 +372,4 @@ document.querySelectorAll('#tentangkami .sidebar li').forEach((item) => {
 
 // tampilkan default (misalnya profil)
 document.getElementById('contentTentangKami').innerHTML = contentDataTentangKami['profil'];
+

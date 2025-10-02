@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id"])) {
     // Update foto jika ada
     if(isset($_FILES['foto']) && $_FILES['foto']['name'] != ""){
         $fileName = time() . "_" . basename($_FILES["foto"]["name"]);
-        $targetFile = "uploads/" . $fileName;
+        $targetFile = "uploads/hero/" . $fileName;
 
         if(move_uploaded_file($_FILES["foto"]["tmp_name"], $targetFile)){
             // Hapus foto lama
@@ -23,7 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id"])) {
     // Update video jika ada
     if(isset($_FILES['video']) && $_FILES['video']['name'] != ""){
         $fileName = time() . "_" . basename($_FILES["video"]["name"]);
-        $targetFile = "uploads/" . $fileName;
+        $targetFile = "uploads/hero/" . $fileName;
 
         if(move_uploaded_file($_FILES["video"]["tmp_name"], $targetFile)){
             // Hapus video lama
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["id"])) {
     }
 
     $_SESSION['statusMessage'] = "✅ Hero berhasil diperbarui!";
-    header("Location: hero.php");
+    header("Location: dashboard.php");
     exit;
 }
 ?>

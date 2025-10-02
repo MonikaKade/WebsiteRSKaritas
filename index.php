@@ -76,29 +76,30 @@ if ($resultHero && $resultHero->num_rows > 0) {
     </script>
 
   <section id="home" class="slider">
-    <?php foreach ($heroData as $row): ?>
-        <div class="slides">
-            <?php if (!empty($row['video'])): ?>
-                <video autoplay muted loop class="hero-video">
-                    <source src="admin/<?= $row['video'] ?>" type="video/mp4">
-                </video>
-            <?php elseif (!empty($row['foto'])): ?>
-                <img src="admin/<?= $row['foto'] ?>" alt="Hero Image">
-            <?php else: ?>
-                <img src="asset/default.jpg" alt="Default">
-            <?php endif; ?>
-        </div>
-    <?php endforeach; ?>
-
-    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-    <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-    <div class="dots">
-        <?php for ($i = 1; $i <= count($heroData); $i++): ?>
-            <span class="dot" onclick="currentSlide(<?= $i ?>)"></span>
-        <?php endfor; ?>
+  <?php foreach ($heroData as $row): ?>
+    <div class="slides">
+      <?php if (!empty($row['video'])): ?>
+        <video autoplay muted loop class="hero-media">
+          <source src="admin/<?= $row['video'] ?>" type="video/mp4">
+        </video>
+      <?php elseif (!empty($row['foto'])): ?>
+        <img src="admin/<?= $row['foto'] ?>" alt="Hero Image" class="hero-media">
+      <?php else: ?>
+        <img src="asset/default.jpg" alt="Default" class="hero-media">
+      <?php endif; ?>
     </div>
+  <?php endforeach; ?>
+
+  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+  <div class="dots">
+    <?php for ($i = 1; $i <= count($heroData); $i++): ?>
+      <span class="dot" onclick="currentSlide(<?= $i ?>)"></span>
+    <?php endfor; ?>
+  </div>
 </section>
+
 
 
     <!-- TENTANG KAMI -->

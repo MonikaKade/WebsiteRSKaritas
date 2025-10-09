@@ -1,5 +1,12 @@
 <?php
 session_start();
+     // Ganti cek login menjadi:
+     if (!isset($_SESSION['admin_id'])) {
+         header("Location: login.php");
+         exit;
+     }
+     
+     
 require 'config.php';
 
 // 🔐 Cek login admin
@@ -8,7 +15,7 @@ if (!isset($_SESSION['admin'])) {
     exit;
 }
 
-// === Statistik dasar (buat dashboard utama saja) ===
+// === Statistik dasar (buat dashboard utama) ===
 $total_res = $conn->query("SELECT COUNT(*) AS total FROM visitor_log");
 $total = $total_res->fetch_assoc()['total'] ?? 0;
 
@@ -26,7 +33,7 @@ while ($row = $pages_res->fetch_assoc()) {
 $shareCount = 120;
 $likeCount  = 340;
 
-// Ambil parameter page dengan default 'home' untuk dashboard utama
+// Tentukan halaman yang diminta
 $page = $_GET['page'] ?? 'home';
 ?>
 <!DOCTYPE html>
@@ -38,11 +45,7 @@ $page = $_GET['page'] ?? 'home';
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background: #f5f6fa;
-            margin: 0;
-        }
+        body {font-family: 'Segoe UI', sans-serif; background: #f5f6fa; margin: 0;}
         .sidebar {
             height: 100vh;
             background: #2C3E50;
@@ -52,71 +55,30 @@ $page = $_GET['page'] ?? 'home';
             width: 250px;
             overflow-y: auto;
         }
-        .sidebar .brand {
-            display: flex;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-        .sidebar .brand img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 10px;
-        }
-        .sidebar .brand h4 {
-            font-size: 1.1rem;
-            font-weight: 600;
-            color: #fff;
-            margin: 0;
-        }
+        .sidebar .brand {display: flex; align-items: center; margin-bottom: 30px;}
+        .sidebar .brand img {width: 40px; height: 40px; border-radius: 50%; margin-right: 10px;}
+        .sidebar .brand h4 {font-size: 1.1rem; font-weight: 600; color: #fff; margin: 0;}
         .sidebar a {
-            display: block;
-            padding: 10px 15px;
-            margin: 8px 0;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            transition: 0.3s;
+            display: block; padding: 10px 15px; margin: 8px 0;
+            color: white; text-decoration: none; border-radius: 6px; transition: 0.3s;
         }
-        .sidebar a:hover,
-        .sidebar a.active {
-            background: rgba(255, 255, 255, 0.2);
-        }
-        .main-content {
-            margin-left: 250px;
-            padding: 25px;
-        }
-        .card {
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-        }
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-            gap: 20px;
-        }
+        .sidebar a:hover, .sidebar a.active {background: rgba(255, 255, 255, 0.2);}
+        .main-content {margin-left: 250px; padding: 25px;}
+        .card {border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.05);}
+        .stats-grid {display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 20px;}
         @media (max-width: 768px) {
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-            }
-            .main-content {
-                margin-left: 0;
-            }
+            .sidebar {width: 100%; height: auto; position: relative;}
+            .main-content {margin-left: 0;}
         }
     </style>
 </head>
 <body>
-
 <!-- Sidebar -->
 <div class="sidebar">
     <div class="brand">
         <img src="../asset/logo.jpeg" alt="Logo RS Karitas">
         <h4>RS Karitas Weetabula</h4>
     </div>
-
     <a href="dashboard.php" class="<?= $page === 'home' ? 'active' : '' ?>">🏠 Dashboard</a>
     <a href="dashboard.php?page=dokter" class="<?= $page === 'dokter' ? 'active' : '' ?>">👨‍⚕️ Kelola Dokter</a>
     <a href="dashboard.php?page=hero" class="<?= $page === 'hero' ? 'active' : '' ?>">🖼️ Hero Section</a>
@@ -127,19 +89,30 @@ $page = $_GET['page'] ?? 'home';
 <!-- Main Content -->
 <div class="main-content">
     <div class="container-fluid">
-
         <?php
-        // Logika routing halaman
-        if ($page === 'akun') {
-            include 'setting.php';
-        } elseif ($page === 'dokter') {
-            include 'dokter.php';
-        } elseif ($page === 'hero') {
-            include 'hero.php';
+        // Routing antar halaman
+        if ($page === 'dokter') {
+         if (file_exists('dokter.php')) {
+             include 'dokter.php';
+         } else {
+             echo "<div class='alert alert-warning'>Halaman Dokter tidak ditemukan.</div>";
+         }
+     } elseif ($page === 'hero') {
+         if (file_exists('hero.php')) {
+             include 'hero.php';
+         } else {
+             echo "<div class='alert alert-warning'>Halaman Hero tidak ditemukan.</div>";
+         }
+     } elseif ($page === 'akun') {
+         if (file_exists('setting.php')) {
+             include 'setting.php';
+         } else {
+             echo "<div class='alert alert-warning'>Halaman Pengaturan Akun tidak ditemukan. Buat file setting.php.</div>";
+         }
         } else {
-            // Default: Dashboard utama
         ?>
-            <h2>Halo, <?= htmlspecialchars($_SESSION['admin']) ?> 👋</h2>
+            <!-- Konten utama dashboard -->
+            <h2>Halo, <?= htmlspecialchars($_SESSION['admin']); ?> 👋</h2>
             <p>Selamat datang di dashboard analitik RS Karitas.</p>
 
             <div class="stats-grid mb-4">
@@ -167,33 +140,29 @@ $page = $_GET['page'] ?? 'home';
             </div>
 
             <script>
-                const ctx = document.getElementById('visitorChart').getContext('2d');
-                new Chart(ctx, {
-                    type: 'bar',
-                    data: {
-                        labels: <?= json_encode($pages) ?>,
-                        datasets: [{
-                            label: 'Jumlah Kunjungan',
-                            data: <?= json_encode($hits) ?>,
-                            backgroundColor: 'rgba(54, 162, 235, 0.6)',
-                            borderColor: 'rgba(54, 162, 235, 1)',
-                            borderWidth: 1
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: { legend: { display: false } },
-                        scales: { y: { beginAtZero: true } }
-                    }
-                });
+            const ctx = document.getElementById('visitorChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: <?= json_encode($pages) ?>,
+                    datasets: [{
+                        label: 'Jumlah Kunjungan',
+                        data: <?= json_encode($hits) ?>,
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: { legend: { display: false } },
+                    scales: { y: { beginAtZero: true } }
+                }
+            });
             </script>
-        <?php
-        }
-        ?>
-
+        <?php } ?>
     </div>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

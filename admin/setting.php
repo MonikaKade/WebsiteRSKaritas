@@ -1,5 +1,8 @@
 <?php
-session_start(); // 🧠 WAJIB! biar session bisa diakses
+
+if (session_status() === PHP_SESSION_NONE) session_start();
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 include "config.php";
 
 // Pastikan admin sudah login
@@ -8,23 +11,21 @@ if (!isset($_SESSION['admin_id'])) {
     exit;
 }
 
-$adminId = intval($_SESSION['admin_id']); // pastikan ID valid
+$adminId = intval($_SESSION['admin_id']);
 $result = $conn->query("SELECT * FROM admin WHERE id = $adminId");
-
 if (!$result || $result->num_rows === 0) {
     die("<div class='alert alert-danger'>Akun tidak ditemukan di database.</div>");
 }
 
 $admin = $result->fetch_assoc();
-
 $error = "";
 $success = "";
 
-// ====== HANDLE UPDATE / DELETE ======
+// === HANDLE UPDATE / DELETE ===
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? '';
 
-    // ==================== UPDATE AKUN ====================
+    // UPDATE AKUN
     if ($action === 'update') {
         $nama = trim($_POST['nama']);
         $username = trim($_POST['username']);
@@ -34,11 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $password_baru = $_POST['password_baru'] ?? '';
         $konfirmasi_password = $_POST['konfirmasi_password'] ?? '';
 
-        // Validasi
         if (empty($nama) || empty($username)) {
             $error = "⚠️ Nama dan username wajib diisi!";
         } else {
-            // Jika user ingin ganti password
             if (!empty($password_lama) || !empty($password_baru) || !empty($konfirmasi_password)) {
                 if (!password_verify($password_lama, $admin['password'])) {
                     $error = "❌ Password lama salah!";
@@ -56,7 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
                 }
             } else {
-                // Jika tanpa ubah password
                 $stmt = $conn->prepare("UPDATE admin SET nama=?, username=?, email=?, nohp=? WHERE id=?");
                 $stmt->bind_param("ssssi", $nama, $username, $email, $nohp, $adminId);
                 if ($stmt->execute()) {
@@ -68,12 +66,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        // Refresh data setelah update
         $result = $conn->query("SELECT * FROM admin WHERE id = $adminId");
         $admin = $result->fetch_assoc();
     }
 
-    // ==================== HAPUS AKUN ====================
+    // HAPUS AKUN
     if ($action === 'delete') {
         $confirm = $_POST['confirm_delete'] ?? '';
         if ($confirm === 'HAPUS') {
@@ -96,13 +93,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <div class="card p-4 shadow-sm">
   <h3 class="mb-4">⚙️ Pengaturan Akun</h3>
 
-  <?php if (!empty($error)): ?>
-    <div class="alert alert-danger"><?= $error ?></div>
-  <?php endif; ?>
-
-  <?php if (!empty($success)): ?>
-    <div class="alert alert-success"><?= $success ?></div>
-  <?php endif; ?>
+  <?php if ($error): ?><div class="alert alert-danger"><?= $error ?></div><?php endif; ?>
+  <?php if ($success): ?><div class="alert alert-success"><?= $success ?></div><?php endif; ?>
 
   <form method="POST">
     <input type="hidden" name="action" value="update">
@@ -151,7 +143,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <div class="mt-4">
     <h5 class="text-danger">🗑️ Hapus Akun</h5>
     <p class="text-muted">Tindakan ini tidak dapat dibatalkan. Semua data akun akan dihapus permanen.</p>
-
     <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Hapus Akun</button>
   </div>
 </div>

@@ -21,6 +21,9 @@ if ($resultHero && $resultHero->num_rows > 0) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rumah Sakit Karitas Weetabula</title>
 
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
     <!-- CSS -->
     <link rel="stylesheet" href="css/style.css" />
 
@@ -64,7 +67,7 @@ if ($resultHero && $resultHero->num_rows > 0) {
             sections.forEach(sec => {
                 if (sec.innerText.toLowerCase().includes(keyword)) {
                     sec.scrollIntoView({ behavior: "smooth" });
-                    sec.style.backgroundColor = "rgba(255,255,0,0.2)"; // highlight
+                    sec.style.backgroundColor = "rgba(255,255,0,0.2)";
                     found = true;
                 }
             });
@@ -75,35 +78,39 @@ if ($resultHero && $resultHero->num_rows > 0) {
         }
     </script>
 
-  <section id="home" class="slider">
-  <?php foreach ($heroData as $row): ?>
-    <div class="slides">
-      <?php if (!empty($row['video'])): ?>
-        <video autoplay muted loop class="hero-media">
-          <source src="admin/<?= $row['video'] ?>" type="video/mp4">
-        </video>
-      <?php elseif (!empty($row['foto'])): ?>
-        <img src="admin/<?= $row['foto'] ?>" alt="Hero Image" class="hero-media">
-      <?php else: ?>
-        <img src="asset/default.jpg" alt="Default" class="hero-media">
-      <?php endif; ?>
-    </div>
-  <?php endforeach; ?>
+    <!-- HERO SECTION -->
+    <section id="home" class="slider">
+        <?php foreach ($heroData as $row): ?>
+            <div class="slides fade">
+                <?php if (!empty($row['video'])): ?>
+                    <video autoplay muted loop class="hero-media">
+                        <source src="admin/<?= $row['video'] ?>" type="video/mp4">
+                    </video>
+                <?php elseif (!empty($row['foto'])): ?>
+                    <img src="admin/<?= $row['foto'] ?>" alt="Hero Image" class="hero-media">
+                <?php else: ?>
+                    <img src="asset/default.jpg" alt="Default" class="hero-media">
+                <?php endif; ?>
+                <div class="hero-overlay"></div>
+                <div class="hero-caption" data-aos="fade-up">
+                    <h1>Pelayanan Kesehatan Terbaik Untuk Anda</h1>
+                    <p>Kami berkomitmen memberikan perawatan profesional dan manusiawi</p>
+                </div>
+            </div>
+        <?php endforeach; ?>
 
-  <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-  <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
 
-  <div class="dots">
-    <?php for ($i = 1; $i <= count($heroData); $i++): ?>
-      <span class="dot" onclick="currentSlide(<?= $i ?>)"></span>
-    <?php endfor; ?>
-  </div>
-</section>
-
-
+        <div class="dots">
+            <?php for ($i = 1; $i <= count($heroData); $i++): ?>
+                <span class="dot" onclick="currentSlide(<?= $i ?>)"></span>
+            <?php endfor; ?>
+        </div>
+    </section>
 
     <!-- TENTANG KAMI -->
-    <section id="tentangkami" class="section section-tentang-kami fade-section">
+    <section id="tentangkami" class="section section-tentang-kami fade-section" data-aos="fade-up" class="fade-up">
         <div class="wrapper">
             <div class="sidebar">
                 <ul>
@@ -119,7 +126,7 @@ if ($resultHero && $resultHero->num_rows > 0) {
     </section>
 
     <!-- LAYANAN -->
-    <section id="layanan" class="section section-layanan">
+    <section id="layanan" class="section section-layanan" data-aos="fade-up" class="fade-up">
         <div class="wrapper">
             <div class="sidebar">
                 <ul>
@@ -133,41 +140,33 @@ if ($resultHero && $resultHero->num_rows > 0) {
         </div>
     </section>
 
+    <section class="mitra-section fade-up" id="mitra">
+  <h2>Kerja Sama & Mitra</h2>
+  <p>Kami bekerja sama dengan berbagai instansi dan pihak terkait untuk memberikan layanan terbaik kepada masyarakat.</p>
+  
+  <div class="mitra-grid">
+    <div class="mitra-card"><img src="asset/logo-bpjs.png" alt="BPJS Kesehatan"></div>
+    <div class="mitra-card"><img src="asset/logo-bankbri.png" alt="Bank BRI"></div>
+    <div class="mitra-card"><img src="asset/logo-alkes.png" alt="Alkes"></div>
+    <div class="mitra-card"><img src="asset/logo-dinkes.png" alt="Dinas Kesehatan"></div>
+    <div class="mitra-card"><img src="asset/logo-kemenkes.png" alt="Kementerian Kesehatan"></div>
+  </div>
+</section>
 
 
     <!-- KONTAK -->
-    <section id="kontak" class="section section-kontak fade-section">
+    <section id="kontak" class="section section-kontak fade-section" data-aos="fade-up" class="fade-up">
         <div class="wrapper">
-            <div class="contact-info" style="flex: 1;">
+            <div class="contact-info">
                 <h2>Hubungi Kami</h2>
-                <p>Kami siap membantu dan menjawab pertanyaan Anda. Silakan hubungi kami melalui informasi di bawah ini.</p>
+                <p>Kami siap membantu dan menjawab pertanyaan Anda.</p>
 
-                <div class="info-box">
-                    <i class="fas fa-home"></i>
-                    <div>
-                        <h4>Alamat</h4>
-                        <p>Jl. Sehat No. 123, Weetabula</p>
-                    </div>
-                </div>
-
-                <div class="info-box">
-                    <i class="fas fa-phone"></i>
-                    <div>
-                        <h4>Telepon</h4>
-                        <p>+62 812 3456 7890</p>
-                    </div>
-                </div>
-
-                <div class="info-box">
-                    <i class="fas fa-envelope"></i>
-                    <div>
-                        <h4>Email</h4>
-                        <p>info@rsweetabula.com</p>
-                    </div>
-                </div>
+                <div class="info-box"><i class="fas fa-home"></i><div><h4>Alamat</h4><p>Jl. Sehat No. 123, Weetabula</p></div></div>
+                <div class="info-box"><i class="fas fa-phone"></i><div><h4>Telepon</h4><p>+62 812 3456 7890</p></div></div>
+                <div class="info-box"><i class="fas fa-envelope"></i><div><h4>Email</h4><p>info@rsweetabula.com</p></div></div>
             </div>
 
-            <div class="contact-form" style="flex: 1;">
+            <div class="contact-form">
                 <h3>Kirim Pesan</h3>
                 <form id="formKontak">
                     <input type="text" placeholder="Nama Lengkap" required>
@@ -184,7 +183,7 @@ if ($resultHero && $resultHero->num_rows > 0) {
         <div class="footer-container">
             <div class="footer-col">
                 <img src="asset/logo.jpeg" alt="Logo Rumah Sakit" class="logo" />
-                <p>Memberikan pelayanan kesehatan terbaik dengan tenaga profesional dan fasilitas modern untuk masyarakat.</p>
+                <p>Memberikan pelayanan kesehatan terbaik dengan tenaga profesional dan fasilitas modern.</p>
                 <div class="footer-social">
                     <a href="#"><i class="fab fa-facebook-f"></i></a>
                     <a href="#"><i class="fab fa-twitter"></i></a>
@@ -192,7 +191,6 @@ if ($resultHero && $resultHero->num_rows > 0) {
                     <a href="#"><i class="fab fa-youtube"></i></a>
                 </div>
             </div>
-
             <div class="footer-col">
                 <h4>Quick Links</h4>
                 <ul>
@@ -202,7 +200,6 @@ if ($resultHero && $resultHero->num_rows > 0) {
                     <li><a href="#">Kontak</a></li>
                 </ul>
             </div>
-
             <div class="footer-col">
                 <h4>Layanan</h4>
                 <ul>
@@ -213,7 +210,6 @@ if ($resultHero && $resultHero->num_rows > 0) {
                     <li><a href="#">IGD 24 Jam</a></li>
                 </ul>
             </div>
-
             <div class="footer-col">
                 <h4>Informasi</h4>
                 <p><i class="fas fa-phone"></i> +62 812 3456 7890</p>
@@ -224,7 +220,6 @@ if ($resultHero && $resultHero->num_rows > 0) {
                 <p>Minggu (Tutup)</p>
             </div>
         </div>
-
         <div class="footer-bottom">
             <p>© 2025 Rumah Sakit Karitas Weetabula. All Rights Reserved.</p>
         </div>
@@ -232,9 +227,7 @@ if ($resultHero && $resultHero->num_rows > 0) {
 
     <!-- JS -->
     <script src="js/script.js"></script>
-    <script>
-        AOS.init();
-    </script>
+    <script>AOS.init();</script>
 </body>
 
 </html>

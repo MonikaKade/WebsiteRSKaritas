@@ -145,11 +145,11 @@ if ($resultHero && $resultHero->num_rows > 0) {
   <p>Kami bekerja sama dengan berbagai instansi dan pihak terkait untuk memberikan layanan terbaik kepada masyarakat.</p>
   
   <div class="mitra-grid">
-    <div class="mitra-card"><img src="asset/logo-bpjs.png" alt="BPJS Kesehatan"></div>
-    <div class="mitra-card"><img src="asset/logo-bankbri.png" alt="Bank BRI"></div>
-    <div class="mitra-card"><img src="asset/logo-alkes.png" alt="Alkes"></div>
-    <div class="mitra-card"><img src="asset/logo-dinkes.png" alt="Dinas Kesehatan"></div>
-    <div class="mitra-card"><img src="asset/logo-kemenkes.png" alt="Kementerian Kesehatan"></div>
+    <div class="mitra-card"><img src="asset/bpjs.png" alt="BPJS Kesehatan"></div>
+    <div class="mitra-card"><img src="asset/mjkn.png" alt="Bank BRI"></div>
+    <div class="mitra-card"><img src="asset/simrs.png" alt="Alkes"></div>
+    <div class="mitra-card"><img src="asset/kemenkes.png" alt="kementerian Kesehatan"></div>
+    <div class="mitra-card"><img src="asset/dinkes.png" alt="dinas Kesehatan"></div>
   </div>
 </section>
 

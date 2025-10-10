@@ -58,38 +58,179 @@ if (isset($conn)) $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Admin RS Karitas</title>
     <style>
-        * {margin:0; padding:0; box-sizing:border-box;}
-        body { font-family:'Arial', sans-serif; height:100vh; display:flex; }
-        .left-panel { flex:1; background: linear-gradient(135deg, #6a11cb, #2575fc); color:white; display:flex; flex-direction:column; justify-content:center; align-items:center; padding:40px; }
-        .left-panel h1 { font-size:48px; font-weight:bold; text-align:center; }
-        .right-panel { flex:1; background:#fff; display:flex; justify-content:center; align-items:center; padding:40px; box-shadow:-2px 0 10px rgba(0,0,0,0.05); }
-        .login-box { width:100%; max-width:360px; }
-        h2 { margin-bottom:10px; color:#333; }
-        .login-box p { color:#666; margin-bottom:20px; }
-        input[type="text"], input[type="password"] { width:100%; padding:12px; margin-bottom:15px; border:1px solid #ccc; border-radius:6px; }
-        button { width:100%; padding:12px; background:#6a11cb; color:#fff; border:none; border-radius:6px; cursor:pointer; font-weight:bold; }
-        button:hover { background:#5b0eb8; }
-        .bottom-links { margin-top:15px; font-size:14px; text-align:center; }
-        .bottom-links a { color:#6a11cb; text-decoration:none; }
-        .error { color:red; margin-bottom:10px; padding:10px; background:#ffe6e6; border-radius:4px; border-left:4px solid red; }
+        :root {
+            --primary: #0a74da;
+            --primary-light: #3ba7ff;
+            --primary-dark: #064a8c;
+            --text: #333;
+            --light-text: #777;
+            --bg: #f8fbff;
+            --white: #fff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --radius: 14px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            display: flex;
+            background: var(--bg);
+        }
+
+        .left-panel {
+            flex: 1;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .left-panel h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 10px;
+        }
+
+        .left-panel p {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .right-panel {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 380px;
+            background: var(--white);
+            padding: 40px 35px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        h2 {
+            color: var(--primary-dark);
+            margin-bottom: 10px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .login-box p {
+            text-align: center;
+            color: var(--light-text);
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 12px 14px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--radius);
+            font-size: 0.95rem;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(10,116,218,0.2);
+            outline: none;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            border-radius: var(--radius);
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: background 0.3s ease, transform 0.2s;
+        }
+
+        button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+        }
+
+        .bottom-links {
+            margin-top: 18px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+
+        .bottom-links a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .bottom-links a:hover {
+            text-decoration: underline;
+        }
+
+        .error {
+            color: red;
+            margin-bottom: 15px;
+            padding: 12px;
+            background: #ffe6e6;
+            border-radius: var(--radius);
+            border-left: 4px solid red;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 900px) {
+            body {
+                flex-direction: column;
+            }
+            .left-panel {
+                flex: none;
+                height: 200px;
+                border-bottom-left-radius: 40px;
+                border-bottom-right-radius: 40px;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="left-panel">
-        <h1>Hello,<br>Welcome Back!</h1>
+        <h1>Selamat Datang<br>Admin RS Karitas</h1>
+        <p>Kelola data dan pantau aktivitas website dengan mudah.</p>
     </div>
+
     <div class="right-panel">
         <div class="login-box">
             <h2>Login Admin</h2>
-            <p>Masukkan akun Anda untuk masuk ke dashboard.</p>
-            <?php if($error): ?><div class="error"><?= htmlspecialchars($error); ?></div><?php endif; ?>
+            <p>Masukkan akun Anda untuk mengakses dashboard.</p>
+
+            <?php if($error): ?>
+                <div class="error"><?= htmlspecialchars($error); ?></div>
+            <?php endif; ?>
+
             <form method="POST" action="">
                 <input type="text" name="username_or_email" placeholder="Username atau Email" required>
                 <input type="password" name="password" placeholder="Password" required>
-                <button type="submit">Login</button>
+                <button type="submit">Masuk</button>
             </form>
+
             <div class="bottom-links">
-                <a href="lupapass.php">Lupa Password?</a> | <a href="register.php">Daftar</a>
+                <a href="lupapass.php">Lupa Password?</a> • 
+                <a href="register.php">Daftar Akun</a>
             </div>
         </div>
     </div>

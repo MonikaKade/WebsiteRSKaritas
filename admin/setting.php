@@ -1,5 +1,4 @@
 <?php
-
 if (session_status() === PHP_SESSION_NONE) session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -89,12 +88,124 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 ?>
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>⚙️ Pengaturan Akun Admin</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background: #f4f7f8;
+      font-family: 'Segoe UI', sans-serif;
+    }
 
-<div class="card p-4 shadow-sm">
-  <h3 class="mb-4">⚙️ Pengaturan Akun</h3>
+    .settings-container {
+      max-width: 850px;
+      margin: 50px auto;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+      padding: 40px;
+      transition: 0.3s ease;
+    }
 
-  <?php if ($error): ?><div class="alert alert-danger"><?= $error ?></div><?php endif; ?>
-  <?php if ($success): ?><div class="alert alert-success"><?= $success ?></div><?php endif; ?>
+    .settings-container:hover {
+      box-shadow: 0 12px 25px rgba(0,0,0,0.08);
+    }
+
+    .settings-header h3 {
+      font-weight: 700;
+      color: #006b6b;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .form-label {
+      font-weight: 600;
+      color: #333;
+    }
+
+    .form-control {
+      border-radius: 12px;
+      border: 1px solid #ddd;
+      padding: 10px 14px;
+      transition: all 0.2s ease;
+    }
+
+    .form-control:focus {
+      border-color: #009999;
+      box-shadow: 0 0 0 3px rgba(0,153,153,0.15);
+    }
+
+    .btn-primary {
+      background-color: #009999;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 20px;
+      font-weight: 600;
+    }
+
+    .btn-primary:hover {
+      background-color: #007a7a;
+    }
+
+    .btn-outline-danger {
+      border-radius: 10px;
+      font-weight: 600;
+      padding: 8px 18px;
+    }
+
+    .alert {
+      border-radius: 10px;
+    }
+
+    .divider {
+      height: 1px;
+      background-color: #e5e5e5;
+      margin: 30px 0;
+    }
+
+    .delete-section h5 {
+      font-weight: 700;
+      color: #d9534f;
+    }
+
+    .delete-section p {
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    .modal-content {
+      border-radius: 15px;
+    }
+
+    .modal-header {
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+    }
+
+    @media (max-width: 768px) {
+      .settings-container {
+        padding: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="settings-container">
+  <div class="settings-header mb-4">
+    <h3>⚙️ Pengaturan Akun</h3>
+  </div>
+
+  <?php if ($error): ?>
+    <div class="alert alert-danger"><?= $error ?></div>
+  <?php endif; ?>
+  <?php if ($success): ?>
+    <div class="alert alert-success"><?= $success ?></div>
+  <?php endif; ?>
 
   <form method="POST">
     <input type="hidden" name="action" value="update">
@@ -118,8 +229,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
     </div>
 
-    <hr>
-    <h5 class="mb-3">🔐 Keamanan</h5>
+    <div class="divider"></div>
+
+    <h5 class="mb-3 text-secondary">🔐 Keamanan</h5>
     <div class="row">
       <div class="col-md-4 mb-3">
         <label class="form-label">Password Lama</label>
@@ -138,11 +250,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <button type="submit" class="btn btn-primary mt-3">💾 Simpan Perubahan</button>
   </form>
 
-  <hr class="my-4">
+  <div class="divider"></div>
 
-  <div class="mt-4">
-    <h5 class="text-danger">🗑️ Hapus Akun</h5>
-    <p class="text-muted">Tindakan ini tidak dapat dibatalkan. Semua data akun akan dihapus permanen.</p>
+  <div class="delete-section">
+    <h5>🗑️ Hapus Akun</h5>
+    <p>Tindakan ini tidak dapat dibatalkan. Semua data akun akan dihapus permanen.</p>
     <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Hapus Akun</button>
   </div>
 </div>
@@ -170,3 +282,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
   </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

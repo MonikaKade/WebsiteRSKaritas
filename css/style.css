@@ -145,7 +145,7 @@ body {
 
 .hero-caption {
   position: absolute;
-  top: 20%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: #fff;
@@ -522,7 +522,7 @@ body {
 
 .mitra-section h2 {
   font-size: 2rem;
-  color: #006b6b;
+  color: #f7d97e;
   margin-bottom: 10px;
 }
 
@@ -532,18 +532,25 @@ body {
   margin-bottom: 40px;
 }
 
+/* Grid tata letak */
 .mitra-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
   gap: 30px;
-  align-items: center;
+  align-items: stretch;
   justify-items: center;
 }
 
+/* Kartu logo */
 .mitra-card {
   background: #fff;
   border-radius: 16px;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  width: 160px;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 20px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -553,23 +560,35 @@ body {
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
+/* Gambar logo */
 .mitra-card img {
   width: 100%;
-  max-width: 120px;
-  height: auto;
+  max-width: 100px;
+  height: 100px;
   object-fit: contain;
   filter: grayscale(80%);
-  transition: filter 0.3s ease;
+  transition: filter 0.3s ease, transform 0.3s ease;
 }
 
 .mitra-card:hover img {
   filter: grayscale(0%);
+  transform: scale(1.05);
 }
 
-/* Responsif */
+/* Responsif untuk layar kecil */
 @media (max-width: 600px) {
   .mitra-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
+  }
+
+  .mitra-card {
+    width: 140px;
+    height: 140px;
+  }
+
+  .mitra-card img {
+    max-width: 80px;
+    height: 80px;
   }
 }

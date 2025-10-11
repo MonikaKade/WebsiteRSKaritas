@@ -261,3 +261,11 @@ const fadeObserver2 = new IntersectionObserver(entries => {
 }, { threshold: 0.2 });
 
 fadeElements.forEach(el => fadeObserver2.observe(el));
+
+document.getElementById("formDaftarOnline").addEventListener("submit", function(e) {
+  e.preventDefault();
+  alert("Pendaftaran berhasil dikirim! Kami akan segera menghubungi Anda.");
+  this.reset();
+});
+
+

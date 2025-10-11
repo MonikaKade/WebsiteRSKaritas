@@ -41,13 +41,14 @@ if ($resultHero && $resultHero->num_rows > 0) {
         <div class="navbar-container">
             <div class="navbar-left">
                 <img src="asset/logo.jpeg" alt="logo" class="logo" />
-                <span class="site-name">Rumah Sakit Karitas Weetabula</span>
+                <span class="site-name">RS Karitas Weetabula</span>
             </div>
 
             <nav class="nav-menu">
                 <a href="#home">Home</a>
                 <a href="#tentangkami">Tentang Kami</a>
                 <a href="#layanan">Layanan</a>
+                <a href="#daftaronline">Daftar Online</a>
                 <a href="#kontak">Kontak</a>
             </nav>
 
@@ -139,6 +140,77 @@ if ($resultHero && $resultHero->num_rows > 0) {
             <div class="content" id="contentLayanan"></div>
         </div>
     </section>
+    <!-- DAFTAR ONLINE -->
+<section id="daftaronline" class="section section-daftaronline" data-aos="fade-up">
+  <div class="daftar-container">
+    <!-- Kiri: Form Appointment -->
+    <div class="daftar-form">
+      <h2>Buat Janji Temu</h2>
+      <p>Silakan isi formulir berikut untuk melakukan pendaftaran atau janji temu secara online.</p>
+
+      <form id="formDaftarOnline">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nama">Nama Lengkap</label>
+            <input type="text" id="nama" name="nama" placeholder="Masukkan nama Anda" required>
+          </div>
+          <div class="form-group">
+            <label for="telepon">Nomor Telepon</label>
+            <input type="text" id="telepon" name="telepon" placeholder="08xx-xxxx-xxxx" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nik">Nomor Rekam Medis / NIK</label>
+            <input type="text" id="nik" name="nik" placeholder="Masukkan NIK Anda" required>
+          </div>
+          <div class="form-group">
+            <label for="departemen">Pilih Poli</label>
+            <select id="departemen" name="departemen" required>
+              <option value="">-- Pilih Poli --</option>
+              <option value="umum">Umum</option>
+              <option value="gigi">Gigi</option>
+              <option value="anak">Anak</option>
+              <option value="kandungan">Kandungan</option>
+              <option value="mata">Mata</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="tanggal">Tanggal Kunjungan</label>
+            <input type="date" id="tanggal" name="tanggal" required>
+          </div>
+          <div class="form-group">
+            <label for="waktu">Waktu Kunjungan</label>
+            <input type="time" id="waktu" name="waktu" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="keluhan">Keluhan / Alasan Berobat</label>
+          <textarea id="keluhan" name="keluhan" rows="3" placeholder="Tuliskan keluhan Anda..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn-daftar">Kirim Pendaftaran</button>
+      </form>
+    </div>
+
+    <!-- Kanan: Foto Dokter -->
+    <div class="daftar-info">
+      <img src="asset/dokter.jpg" alt="Dokter" class="dokter-img">
+      <div class="info-text">
+        <h3>Hubungi Kami</h3>
+        <p><strong>Telepon:</strong> +62 812 3456 7890</p>
+        <p><strong>Email:</strong> rskaritaswtb.sbd@gmail.com</p>
+        <p><strong>Alamat:</strong><br>Wee Tobula, Tambolaka, Sumba Barat Daya, NTT</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 
     <section class="mitra-section fade-up" id="mitra">
   <h2>Kerja Sama & Mitra</h2>
@@ -161,9 +233,9 @@ if ($resultHero && $resultHero->num_rows > 0) {
                 <h2>Hubungi Kami</h2>
                 <p>Kami siap membantu dan menjawab pertanyaan Anda.</p>
 
-                <div class="info-box"><i class="fas fa-home"></i><div><h4>Alamat</h4><p>Jl. Sehat No. 123, Weetabula</p></div></div>
+                <div class="info-box"><i class="fas fa-home"></i><div><h4>Alamat</h4><p>Wee Tobula, Kec. Kota Tambolaka, Kabupaten Sumba Barat Daya, Nusa Tenggara Timur</p></div></div>
                 <div class="info-box"><i class="fas fa-phone"></i><div><h4>Telepon</h4><p>+62 812 3456 7890</p></div></div>
-                <div class="info-box"><i class="fas fa-envelope"></i><div><h4>Email</h4><p>info@rsweetabula.com</p></div></div>
+                <div class="info-box"><i class="fas fa-envelope"></i><div><h4>Email</h4><p>rskaritaswtb.sbd@gmail.com</p></div></div>
             </div>
 
             <div class="contact-form">
@@ -213,8 +285,8 @@ if ($resultHero && $resultHero->num_rows > 0) {
             <div class="footer-col">
                 <h4>Informasi</h4>
                 <p><i class="fas fa-phone"></i> +62 812 3456 7890</p>
-                <p><i class="fas fa-envelope"></i> info@rsweetabula.com</p>
-                <p><i class="fas fa-map-marker-alt"></i> Jl. Sehat No. 123, Weetabula</p>
+                <p><i class="fas fa-envelope"></i> rskaritaswtb.sbd@gmail.com</p>
+                <p><i class="fas fa-map-marker-alt"></i>Wee Tobula, Kec. Kota Tambolaka, Kabupaten Sumba Barat Daya, Nusa Tenggara Tim.</p>
                 <h4>Jam Operasional</h4>
                 <p>Senin - Sabtu (08:00 - 21:00)</p>
                 <p>Minggu (Tutup)</p>

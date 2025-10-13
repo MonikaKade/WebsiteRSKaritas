@@ -60,44 +60,46 @@ if ($resultHero && $resultHero->num_rows > 0) {
     </header>
 
     <script>
-        function cari() {
-            let keyword = document.getElementById("searchInput").value.toLowerCase();
-            let sections = document.querySelectorAll("section");
+    function cari() {
+        let keyword = document.getElementById("searchInput").value.toLowerCase();
+        let sections = document.querySelectorAll("section");
 
-            let found = false;
-            sections.forEach(sec => {
-                if (sec.innerText.toLowerCase().includes(keyword)) {
-                    sec.scrollIntoView({ behavior: "smooth" });
-                    sec.style.backgroundColor = "rgba(255,255,0,0.2)";
-                    found = true;
-                }
-            });
-
-            if (!found) {
-                alert("Hasil tidak ditemukan!");
+        let found = false;
+        sections.forEach(sec => {
+            if (sec.innerText.toLowerCase().includes(keyword)) {
+                sec.scrollIntoView({
+                    behavior: "smooth"
+                });
+                sec.style.backgroundColor = "rgba(255,255,0,0.2)";
+                found = true;
             }
+        });
+
+        if (!found) {
+            alert("Hasil tidak ditemukan!");
         }
+    }
     </script>
 
     <!-- HERO SECTION -->
     <section id="home" class="slider">
         <?php foreach ($heroData as $row): ?>
-            <div class="slides fade">
-                <?php if (!empty($row['video'])): ?>
-                    <video autoplay muted loop class="hero-media">
-                        <source src="admin/<?= $row['video'] ?>" type="video/mp4">
-                    </video>
-                <?php elseif (!empty($row['foto'])): ?>
-                    <img src="admin/<?= $row['foto'] ?>" alt="Hero Image" class="hero-media">
-                <?php else: ?>
-                    <img src="asset/default.jpg" alt="Default" class="hero-media">
-                <?php endif; ?>
-                <div class="hero-overlay"></div>
-                <div class="hero-caption" data-aos="fade-up">
-                    <h1>Pelayanan Kesehatan Terbaik Untuk Anda</h1>
-                    <p>Kami berkomitmen memberikan perawatan profesional dan manusiawi</p>
-                </div>
+        <div class="slides fade">
+            <?php if (!empty($row['video'])): ?>
+            <video autoplay muted loop class="hero-media">
+                <source src="admin/<?= $row['video'] ?>" type="video/mp4">
+            </video>
+            <?php elseif (!empty($row['foto'])): ?>
+            <img src="admin/<?= $row['foto'] ?>" alt="Hero Image" class="hero-media">
+            <?php else: ?>
+            <img src="asset/default.jpg" alt="Default" class="hero-media">
+            <?php endif; ?>
+            <div class="hero-overlay"></div>
+            <div class="hero-caption" data-aos="fade-up">
+                <h1>Pelayanan Kesehatan Terbaik Untuk Anda</h1>
+                <p>Kami berkomitmen memberikan perawatan profesional dan manusiawi</p>
             </div>
+        </div>
         <?php endforeach; ?>
 
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -105,7 +107,7 @@ if ($resultHero && $resultHero->num_rows > 0) {
 
         <div class="dots">
             <?php for ($i = 1; $i <= count($heroData); $i++): ?>
-                <span class="dot" onclick="currentSlide(<?= $i ?>)"></span>
+            <span class="dot" onclick="currentSlide(<?= $i ?>)"></span>
             <?php endfor; ?>
         </div>
     </section>
@@ -141,89 +143,106 @@ if ($resultHero && $resultHero->num_rows > 0) {
         </div>
     </section>
     <!-- DAFTAR ONLINE -->
-<section id="daftaronline" class="section section-daftaronline" data-aos="fade-up">
-  <div class="daftar-container">
-    <!-- Kiri: Form Appointment -->
-    <div class="daftar-form">
-      <h2>Buat Janji Temu</h2>
-      <p>Silakan isi formulir berikut untuk melakukan pendaftaran atau janji temu secara online.</p>
+    <section id="daftaronline" class="section section-daftaronline" data-aos="fade-up">
+        <div class="daftar-container">
 
-      <form id="formDaftarOnline">
-        <div class="form-row">
-          <div class="form-group">
-            <label for="nama">Nama Lengkap</label>
-            <input type="text" id="nama" name="nama" placeholder="Masukkan nama Anda" required>
-          </div>
-          <div class="form-group">
-            <label for="telepon">Nomor Telepon</label>
-            <input type="text" id="telepon" name="telepon" placeholder="08xx-xxxx-xxxx" required>
-          </div>
+            <!-- Kiri: Dokter -->
+            <div class="daftar-kiri">
+                <img src="asset/dkrm.png" alt="Dokter" class="dokter-img">
+                <div class="dokter-info">
+                    <p><i class="fa-solid fa-syringe"></i> Daftarkan Diri Anda Sekarang </p>
+                    <p><i class="fa-solid fa-heart-circle-check"></i>Secara Online</p>
+                </div>
+            </div>
+
+            <!-- Kanan: Form -->
+            <div class="daftar-kanan">
+                <h2>Lindungi Dirimu dan Sekitarmu </h2>
+                <p>Daftarkan diri atau buat janji temu kesehatan secara online.</p>
+
+                <form id="formDaftarOnline">
+                    <div class="radio-group">
+                        <label><input type="radio" name="registerFor" value="myself" checked> Untuk Diri Sendiri</label>
+                        <label><input type="radio" name="registerFor" value="other"> Untuk Orang Lain</label>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nama">Nama Lengkap</label>
+                        <input type="text" id="nama" name="nama" placeholder="Masukkan nama lengkap" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Alamat</label>
+                        <input type="text" id="alamat" name="alamat" placeholder="Masukan Alamar Anda" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telepon">Nomor Telepon</label>
+                        <div class="phone-field">
+                            <input type="text" id="telepon" name="telepon" placeholder="81234567890" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="departemen">Pilih Poli</label>
+                            <select id="departemen" name="departemen" required>
+                                <option value="">-- Pilih Poli --</option>
+                                <option value="umum">Umum</option>
+                                <option value="gigi">Gigi</option>
+                                <option value="anak">Anak</option>
+                                <option value="anak">Bedah</option>
+                                <option value="anak">Penyakit Dalam</option>
+                                <option value="anak">Obgyn</option>
+                                <option value="anak">Mata</option>
+                                <option value="kandungan">Saraf</option>
+                                <option value="mata">TB</option>
+                                <option value="anak">THT</option>
+                                <option value="anak">BKIA</option>
+                                <option value="anak">VCT</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="tanggal">Tanggal Kunjungan</label>
+                            <input type="date" id="tanggal" name="tanggal" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="waktu">Waktu Kunjungan</label>
+                            <input type="time" id="waktu" name="waktu" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="keluhan">Keluhan / Alasan</label>
+                            <textarea id="keluhan" name="keluhan" rows="2" placeholder="Tuliskan keluhan Anda..."
+                                required></textarea>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-daftar">Kirim Pendaftaran</button>
+                    <p class="status-text">Sudah mendaftar? <a href="cek_status.php">Cek status Anda</a></p>
+                </form>
+            </div>
+
         </div>
+    </section>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label for="nik">Nomor Rekam Medis / NIK</label>
-            <input type="text" id="nik" name="nik" placeholder="Masukkan NIK Anda" required>
-          </div>
-          <div class="form-group">
-            <label for="departemen">Pilih Poli</label>
-            <select id="departemen" name="departemen" required>
-              <option value="">-- Pilih Poli --</option>
-              <option value="umum">Umum</option>
-              <option value="gigi">Gigi</option>
-              <option value="anak">Anak</option>
-              <option value="kandungan">Kandungan</option>
-              <option value="mata">Mata</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="tanggal">Tanggal Kunjungan</label>
-            <input type="date" id="tanggal" name="tanggal" required>
-          </div>
-          <div class="form-group">
-            <label for="waktu">Waktu Kunjungan</label>
-            <input type="time" id="waktu" name="waktu" required>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="keluhan">Keluhan / Alasan Berobat</label>
-          <textarea id="keluhan" name="keluhan" rows="3" placeholder="Tuliskan keluhan Anda..." required></textarea>
-        </div>
-
-        <button type="submit" class="btn-daftar">Kirim Pendaftaran</button>
-      </form>
-    </div>
-
-    <!-- Kanan: Foto Dokter -->
-    <div class="daftar-info">
-      <img src="asset/dokter.jpg" alt="Dokter" class="dokter-img">
-      <div class="info-text">
-        <h3>Hubungi Kami</h3>
-        <p><strong>Telepon:</strong> +62 812 3456 7890</p>
-        <p><strong>Email:</strong> rskaritaswtb.sbd@gmail.com</p>
-        <p><strong>Alamat:</strong><br>Wee Tobula, Tambolaka, Sumba Barat Daya, NTT</p>
-      </div>
-    </div>
-  </div>
-</section>
 
 
     <section class="mitra-section fade-up" id="mitra">
-  <h2>Kerja Sama & Mitra</h2>
-  <p>Kami bekerja sama dengan berbagai instansi dan pihak terkait untuk memberikan layanan terbaik kepada masyarakat.</p>
-  
-  <div class="mitra-grid">
-    <div class="mitra-card"><img src="asset/bpjs.png" alt="BPJS Kesehatan"></div>
-    <div class="mitra-card"><img src="asset/mjkn.png" alt="Bank BRI"></div>
-    <div class="mitra-card"><img src="asset/simrs.png" alt="Alkes"></div>
-    <div class="mitra-card"><img src="asset/kemenkes.png" alt="kementerian Kesehatan"></div>
-    <div class="mitra-card"><img src="asset/dinkes.png" alt="dinas Kesehatan"></div>
-  </div>
-</section>
+        <h2>Kerja Sama & Mitra</h2>
+        <p>Kami bekerja sama dengan berbagai instansi dan pihak terkait untuk memberikan layanan terbaik kepada
+            masyarakat.</p>
+
+        <div class="mitra-grid">
+            <div class="mitra-card"><img src="asset/bpjs.png" alt="BPJS Kesehatan"></div>
+            <div class="mitra-card"><img src="asset/mjkn.png" alt="Bank BRI"></div>
+            <div class="mitra-card"><img src="asset/simrs.png" alt="Alkes"></div>
+            <div class="mitra-card"><img src="asset/kemenkes.png" alt="kementerian Kesehatan"></div>
+            <div class="mitra-card"><img src="asset/dinkes.png" alt="dinas Kesehatan"></div>
+        </div>
+    </section>
 
 
     <!-- KONTAK -->
@@ -233,9 +252,24 @@ if ($resultHero && $resultHero->num_rows > 0) {
                 <h2>Hubungi Kami</h2>
                 <p>Kami siap membantu dan menjawab pertanyaan Anda.</p>
 
-                <div class="info-box"><i class="fas fa-home"></i><div><h4>Alamat</h4><p>Wee Tobula, Kec. Kota Tambolaka, Kabupaten Sumba Barat Daya, Nusa Tenggara Timur</p></div></div>
-                <div class="info-box"><i class="fas fa-phone"></i><div><h4>Telepon</h4><p>+62 812 3456 7890</p></div></div>
-                <div class="info-box"><i class="fas fa-envelope"></i><div><h4>Email</h4><p>rskaritaswtb.sbd@gmail.com</p></div></div>
+                <div class="info-box"><i class="fas fa-home"></i>
+                    <div>
+                        <h4>Alamat</h4>
+                        <p>Wee Tobula, Kec. Kota Tambolaka, Kabupaten Sumba Barat Daya, Nusa Tenggara Timur</p>
+                    </div>
+                </div>
+                <div class="info-box"><i class="fas fa-phone"></i>
+                    <div>
+                        <h4>Telepon</h4>
+                        <p>+62 812 3456 7890</p>
+                    </div>
+                </div>
+                <div class="info-box"><i class="fas fa-envelope"></i>
+                    <div>
+                        <h4>Email</h4>
+                        <p>rskaritaswtb.sbd@gmail.com</p>
+                    </div>
+                </div>
             </div>
 
             <div class="contact-form">
@@ -286,7 +320,8 @@ if ($resultHero && $resultHero->num_rows > 0) {
                 <h4>Informasi</h4>
                 <p><i class="fas fa-phone"></i> +62 812 3456 7890</p>
                 <p><i class="fas fa-envelope"></i> rskaritaswtb.sbd@gmail.com</p>
-                <p><i class="fas fa-map-marker-alt"></i>Wee Tobula, Kec. Kota Tambolaka, Kabupaten Sumba Barat Daya, Nusa Tenggara Tim.</p>
+                <p><i class="fas fa-map-marker-alt"></i>Wee Tobula, Kec. Kota Tambolaka, Kabupaten Sumba Barat Daya,
+                    Nusa Tenggara Tim.</p>
                 <h4>Jam Operasional</h4>
                 <p>Senin - Sabtu (08:00 - 21:00)</p>
                 <p>Minggu (Tutup)</p>
@@ -299,7 +334,9 @@ if ($resultHero && $resultHero->num_rows > 0) {
 
     <!-- JS -->
     <script src="js/script.js"></script>
-    <script>AOS.init();</script>
+    <script>
+    AOS.init();
+    </script>
 </body>
 
 </html>

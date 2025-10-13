@@ -1,0 +1,36 @@
+<!-- 
+===========================================
+  ALUR PENDAFTARAN ONLINE (FRONTEND)
+===========================================
+
+1. User memilih tujuan pendaftaran:
+   - Untuk Diri Sendiri
+   - Untuk Orang Lain
+
+2. User mengisi data pribadi:
+   - Nama Lengkap
+   - Alamat
+   - Nomor Telepon
+
+3. User memilih informasi kunjungan:
+   - Poli/Departemen
+   - Tanggal Kunjungan
+   - Waktu Kunjungan
+
+4. User menuliskan keluhan / alasan kunjungan (textarea)
+
+5. User menekan tombol "Kirim Pendaftaran":
+   - Data dikirim ke backend (misal: formDaftarOnline.php)
+   - Backend melakukan validasi dan menyimpan data ke database
+
+6. Setelah submit berhasil:
+   - User menampilkan notifikasi sukses
+   - User bisa mengecek status pendaftaran melalui halaman cek_status.php
+   - Backend akan mencocokkan nomor pendaftaran dengan database dan menampilkan status pasien
+
+Catatan:
+- Semua field wajib diisi (required)
+- Format nomor telepon dan tanggal harus sesuai
+- Pilihan poli/departemen harus valid
+===========================================
+-->

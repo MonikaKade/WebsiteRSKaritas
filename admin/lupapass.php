@@ -79,23 +79,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!doctype html>
 <html lang="id">
+
 <head>
-<meta charset="utf-8">
-<title>Lupa Password Admin</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <title>Lupa Password Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body class="d-flex justify-content-center align-items-center vh-100 bg-light">
-  <div class="card p-4 shadow" style="width:360px;">
-    <h4 class="text-center mb-3">🔒 Lupa Password Admin</h4>
-    <?= $message ?>
-    <form method="post">
-      <div class="mb-3">
-        <label for="input" class="form-label">Email atau Nomor HP</label>
-        <input type="text" name="input" id="input" class="form-control" required placeholder="Masukkan email atau nomor HP">
-      </div>
-      <button type="submit" class="btn btn-primary w-100">Kirim Link Reset</button>
-      <a href="login.php" class="d-block text-center mt-3">⬅️ Kembali ke Login</a>
-    </form>
-  </div>
+    <div class="card p-4 shadow" style="width:360px;">
+        <h4 class="text-center mb-3a">🔒 Lupa Password Admin</h4>
+        <?= $message ?>
+        <form method="post">
+            <div class="mb-3">
+                <label for="input" class="form-label">Email atau Nomor HP</label>
+                <input type="text" name="input" id="input" class="form-control" required
+                    placeholder="Masukkan email atau nomor HP">
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Kirim Link Reset</button>
+            <a href="login.php" class="d-block text-center mt-3">⬅️ Kembali ke Login</a>
+        </form>
+    </div>
 </body>
+
 </html>
